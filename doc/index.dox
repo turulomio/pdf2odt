@@ -1,0 +1,32 @@
+/*! \mainpage pdf2odt
+
+Introduction
+============
+
+Convert pdf files to odt
+
+The main web page is located in <a href="https://github.com/turulomio/pdf2odt">https://github.com/turulomio/pdf2odt</a>
+
+The Pypi web page is located in <a href="https://pypi.org/project/pdf2odt/">https://pypi.org/project/pdf2odt</a>
+
+Development
+===========
+- Turulomio (Idea y development)
+
+Github
+======
+This project is hosted in Github, so you can use the next services:
+
+- <a href="https://github.com/turulomio/pdf2odt/issues" target="_blank">Issues</a>
+
+Software used to develop RecPermissions
+=======================================
+
+<a target="_blank" href="https://eric-ide.python-projects.org/index.html">Eric</a> is used as the main IDE
+
+RecPermissions depends on the following software:
+- <a target="_blank" href="https://www.python.org/">Python3</a>, as the main programming language.
+- <a target="_blank" href="https://pypi.org/project/colorama/">Colorama</a>, to give color to console output.
+
+
+*/

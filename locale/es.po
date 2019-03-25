@@ -1,0 +1,56 @@
+# Spanish translations for PACKAGE package
+# Traducciones al español para el paquete PACKAGE.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# root <turulomio@yahoo.es>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: RecPermissions\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-25 23:02+0100\n"
+"PO-Revision-Date: 2018-10-22 18:51+0100\n"
+"Last-Translator: root <turulomio@yahoo.es>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "New Release:"
+msgstr "Nueva versión:"
+
+msgid "  * Change version and date in version.py"
+msgstr "  * Cambiar la versión y la fecha en version.py"
+
+msgid "  * Edit Changelog in README"
+msgstr "  * Modificar el Changelog en README"
+
+msgid "If changed restart from first python setup.py doc"
+msgstr "Si se cambia, reiniciar desde el primer 'python setup.py doc'"
+
+msgid "  * Make a new tag in github"
+msgstr "  * Hacer un nuevo tag en GitHub"
+
+msgid "  * Create a new gentoo ebuild with the new version"
+msgstr "  * Crea un nuevo ebuild de Gentoo con la nueva versión"
+
+msgid "  * Upload to portage repository"
+msgstr "  * Subelo al repositorio del portage"
+
+msgid "Uninstall command only works in Linux"
+msgstr "El comando 'uninstall' solo funciona en Linux"
+
+msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
+msgstr ""
+
+msgid "Developed by Mariano Muñoz 2018-{}"
+msgstr "Desarrollado por Mariano Muñoz 2018-{}"
+
+msgid "File owner will be changed to this parameter. It does nothing if it's not set."
+msgstr "El propietario del fichero será cambiado a este parámetro. No hace nada si no se establece."
+
+msgid "Directory who is going to be changed permissions and owner recursivily"
+msgstr "Directorio desde el que se van a cambiar permisos y propietario de forma recursiva"
+

@@ -1,0 +1,6 @@
+include LICENSE.txt *.py
+recursive-include locale *.po 
+recursive-include pdf2odt *.mo *.py
+recursive-include doc *.py Doxyfile index.dox pdf2odt.png pdf2odt.svg
+prune __pycache__
+global-exclude *.pyc

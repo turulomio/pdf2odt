@@ -1,0 +1,55 @@
+# French translations for PACKAGE package.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Turulomio <turulomio@yahoo.es>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: RecPermissions\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-25 23:02+0100\n"
+"PO-Revision-Date: 2018-11-03 07:11+0100\n"
+"Last-Translator: root <turulomio@yahoo.es>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "New Release:"
+msgstr "Nouvelle sortie :"
+
+msgid "  * Change version and date in version.py"
+msgstr " * Changer la version et la date dans version.py"
+
+msgid "  * Edit Changelog in README"
+msgstr " * Editer le Changelog dans le README"
+
+msgid "If changed restart from first python setup.py doc"
+msgstr "S'il y a eu modification, recommencer depuis le premier document python setup.py"
+
+msgid "  * Make a new tag in github"
+msgstr " * Faire un nouveau tag dans GitHub"
+
+msgid "  * Create a new gentoo ebuild with the new version"
+msgstr " * Créer un nouveau ebuild Gentoo avec la nouvelle version"
+
+msgid "  * Upload to portage repository"
+msgstr " * Uploader au dépôt de portage"
+
+msgid "Uninstall command only works in Linux"
+msgstr "La commande 'désinstaller' marche seulement sur Linux"
+
+msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
+msgstr ""
+
+msgid "Developed by Mariano Muñoz 2018-{}"
+msgstr "Développé par Mariano Muñoz 2018-{}"
+
+msgid "File owner will be changed to this parameter. It does nothing if it's not set."
+msgstr "Le propriétaire du fichier prendra cette valeur. Cela ne fait rien si elle n'est pas définie."
+
+msgid "Directory who is going to be changed permissions and owner recursivily"
+msgstr "Répertoire dont on va changer les permissions et le propriétaire récursivement"
+
