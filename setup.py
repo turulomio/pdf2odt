@@ -46,8 +46,6 @@ class Procedure(Command):
         print("  * python setup.py doc")
         print("  * python setup.py install")
         print("  * python setup.py doxygen")
-        print("  * mcedit doc/ttyrec/howto.py")
-        print("  * python setup.py video" + ". " + _("If changed restart from first python setup.py doc"))
         print("  * git commit -a -m 'pdf2odt-{}'".format(__version__))
         print("  * git push")
         print(_("  * Make a new tag in github"))
