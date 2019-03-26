@@ -4,11 +4,6 @@ import datetime
 import platform
 import sys
 import glob
-
-if platform.system()=="Windows":
-    print("This script only works on Linux")
-    sys.exit(0)
-
 import argparse
 import gettext
 import locale
@@ -32,11 +27,16 @@ except:
 ## You can call with main(['--pretend']). It's equivalento to os.system('pdf2odt --pretend')
 ## @param arguments is an array with parser arguments. For example: ['--max_files_to_store','9']. 
 def main(arguments=None):
+    if platform.system()=="Windows":
+        pdftoppm="pdftoppm.exe"
+    else:
+        pdftoppm="pdftoppm"
+    
     start=datetime.datetime.now()
     parser=argparse.ArgumentParser(prog='pdf2odt', description=_('Converts a pdf to a LibreOffice Writer document with pages as images'), epilog=_("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year)), formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('--version', action='version', version=__version__)
-
     parser.add_argument('--pdf', help=_("PDF file to convert"), action="store", default=None)
+    parser.add_argument('--pdftoppm', help=_("Path to pdftoppm command"), action="store", default=pdftoppm)
     parser.add_argument('output', help=_("Output odt file"), action="store")
 
     args=parser.parse_args(arguments)
@@ -49,8 +49,12 @@ def main(arguments=None):
     except:
         pass
 
+    if platform.system()=="Windows":
+        command="{} -png {} pdf2odt_temporal".format(args.pdftoppm, args.pdf)
+    else:
+        command="{} -png '{}' pdf2odt_temporal".format(args.pdftoppm, args.pdf)
 
-    os.system("pdftoppm -png '{}' 'pdf2odt_temporal'".format(args.pdf))
+    os.system(command)
 
     doc=ODT_Standard(args.output)
     doc.setMetadata("OfficeGenerator title", "OfficeGenerator subject", "Turulomio")
@@ -60,6 +64,7 @@ def main(arguments=None):
         x,y=img.size
         cmx=17
         cmy=y*cmx/x
+        img.close()
         doc.addImage(filename, filename)
         p = P(stylename="Illustration")
         p.addElement(doc.image(filename, cmx,cmy))
@@ -69,4 +74,4 @@ def main(arguments=None):
     doc.save()
 
     for filename in glob.glob("pdf2odt_temporal*.png"):
-        os.system("rm '{}'".format(filename))
+        os.remove(filename)

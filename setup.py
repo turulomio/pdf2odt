@@ -68,7 +68,7 @@ class Uninstall(Command):
             os.system("rm -Rf {}/pdf2odt*".format(site.getsitepackages()[0]))
             os.system("rm /usr/bin/pdf2odt")
         else:
-            print(_("Uninstall command only works in Linux"))
+            os.system("pip uninstall pdf2odt")
 
 class Doc(Command):
     description = "Update man pages and translations"
@@ -120,7 +120,7 @@ setup(name='pdf2odt',
     entry_points = {'console_scripts': ['pdf2odt=pdf2odt.core:main',
                                        ],
                    },
-    install_requires=['colorama','setuptools','officegenerator'],
+    install_requires=['colorama','setuptools','officegenerator','pillow'],
     data_files=[],
     cmdclass={ 'doxygen': Doxygen,
                'doc': Doc,
