@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecPermissions\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 23:36+0100\n"
+"POT-Creation-Date: 2019-03-26 17:59+0100\n"
 "PO-Revision-Date: 2018-11-03 07:11+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: French\n"
@@ -26,9 +26,6 @@ msgstr " * Changer la version et la date dans version.py"
 msgid "  * Edit Changelog in README"
 msgstr " * Editer le Changelog dans le README"
 
-msgid "If changed restart from first python setup.py doc"
-msgstr "S'il y a eu modification, recommencer depuis le premier document python setup.py"
-
 msgid "  * Make a new tag in github"
 msgstr " * Faire un nouveau tag dans GitHub"
 
@@ -37,9 +34,6 @@ msgstr " * Créer un nouveau ebuild Gentoo avec la nouvelle version"
 
 msgid "  * Upload to portage repository"
 msgstr " * Uploader au dépôt de portage"
-
-msgid "Uninstall command only works in Linux"
-msgstr "La commande 'désinstaller' marche seulement sur Linux"
 
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
 msgstr ""
@@ -50,8 +44,17 @@ msgstr ""
 msgid "PDF file to convert"
 msgstr ""
 
+msgid "Path to pdftoppm command"
+msgstr ""
+
 msgid "Output odt file"
 msgstr ""
+
+#~ msgid "If changed restart from first python setup.py doc"
+#~ msgstr "S'il y a eu modification, recommencer depuis le premier document python setup.py"
+
+#~ msgid "Uninstall command only works in Linux"
+#~ msgstr "La commande 'désinstaller' marche seulement sur Linux"
 
 #~ msgid "Developed by Mariano Muñoz 2018-{}"
 #~ msgstr "Développé par Mariano Muñoz 2018-{}"

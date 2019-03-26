@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 23:36+0100\n"
+"POT-Creation-Date: 2019-03-26 18:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,9 +26,6 @@ msgstr ""
 msgid "  * Edit Changelog in README"
 msgstr ""
 
-msgid "If changed restart from first python setup.py doc"
-msgstr ""
-
 msgid "  * Make a new tag in github"
 msgstr ""
 
@@ -38,9 +35,6 @@ msgstr ""
 msgid "  * Upload to portage repository"
 msgstr ""
 
-msgid "Uninstall command only works in Linux"
-msgstr ""
-
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
 msgstr ""
 
@@ -48,6 +42,9 @@ msgid "Developed by Mariano Muñoz 2019-{}"
 msgstr ""
 
 msgid "PDF file to convert"
+msgstr ""
+
+msgid "Path to pdftoppm command"
 msgstr ""
 
 msgid "Output odt file"
