@@ -57,6 +57,10 @@ Dependencies
 
 Changelog
 =========
+0.2.0
+-----
+  * Now works on Windows with popper for windows installation
+
 0.1.0
 -----
   * Basic functionality
