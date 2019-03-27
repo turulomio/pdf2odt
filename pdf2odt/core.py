@@ -2,7 +2,6 @@
 ## @brief Core functions of the package
 import datetime
 import platform
-import sys
 import glob
 import argparse
 import gettext
@@ -75,3 +74,5 @@ def main(arguments=None):
 
     for filename in glob.glob("pdf2odt_temporal*.png"):
         os.remove(filename)
+        
+    print(Style.BRIGHT + _("ODT generation took {}").format(Fore.GREEN + str(datetime.datetime.now()-start)))
