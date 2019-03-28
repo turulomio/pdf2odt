@@ -49,14 +49,16 @@ def main(arguments=None):
         pass
 
     if platform.system()=="Windows":
-        command="{} -png {} pdf2odt_temporal".format(args.pdftoppm, args.pdf)
+        command='""{}" -png "{}" pdf2odt_temporal"'.format(args.pdftoppm, args.pdf) #I add quotes to embrace all command too
     else:
         command="{} -png '{}' pdf2odt_temporal".format(args.pdftoppm, args.pdf)
 
     os.system(command)
 
     doc=ODT_Standard(args.output)
-    doc.setMetadata("OfficeGenerator title", "OfficeGenerator subject", "Turulomio")
+    pdf=os.path.basename(args.pdf)
+    odt=os.path.basename(args.output)
+    doc.setMetadata(_("Converting PDF to ODT"),  _("Converting {} to {} using odt2pdf-{}").format(pdf, odt, __version__), "odt2pdf")
 
     for filename in sorted(glob.glob("pdf2odt_temporal*.png")):
         img = Image.open(filename)
@@ -67,8 +69,6 @@ def main(arguments=None):
         doc.addImage(filename, filename)
         p = P(stylename="Illustration")
         p.addElement(doc.image(filename, cmx,cmy))
-        doc.insertInCursor(p, after=True)
-        p = P(stylename="Standard")
         doc.insertInCursor(p, after=True)
     doc.save()
 
