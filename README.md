@@ -44,7 +44,7 @@ Now you have to download poppler for windows from https://blog.alivate.com.au/po
 
 Now you can use it typing in windows shell:
     
-`pdf2odt --pdf doc.pdf --pdftoppm C:\\Absolut\Path\To\pdftoppm.exe doc.odt`
+`pdf2odt --pdf doc.pdf --pdftoppm C:\Absolut\Path\To\pdftoppm.exe doc.odt`
 
 Dependencies
 ============
@@ -57,6 +57,11 @@ Dependencies
 
 Changelog
 =========
+0.3.0
+-----
+  * Fixed problem with white spaces paths in windows.
+  * Improved metadata information.
+
 0.2.0
 -----
   * Now works on Windows with popper for windows installation

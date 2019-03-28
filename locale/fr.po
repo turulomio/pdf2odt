@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecPermissions\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-26 17:59+0100\n"
+"POT-Creation-Date: 2019-03-28 08:00+0100\n"
 "PO-Revision-Date: 2018-11-03 07:11+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: French\n"
@@ -48,6 +48,15 @@ msgid "Path to pdftoppm command"
 msgstr ""
 
 msgid "Output odt file"
+msgstr ""
+
+msgid "Converting PDF to ODT"
+msgstr ""
+
+msgid "Converting {} to {} using odt2pdf-{}"
+msgstr ""
+
+msgid "ODT generation took {}"
 msgstr ""
 
 #~ msgid "If changed restart from first python setup.py doc"

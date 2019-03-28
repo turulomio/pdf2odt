@@ -50,6 +50,7 @@ class Procedure(Command):
         print("  * git push")
         print(_("  * Make a new tag in github"))
         print("  * python setup.py sdist upload -r pypi")
+        print("  * python setup.py uninstall")
         print(_("  * Create a new gentoo ebuild with the new version"))
         print(_("  * Upload to portage repository")) 
 
