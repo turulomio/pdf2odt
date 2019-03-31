@@ -40,7 +40,9 @@ Then just type:
 
 `pip install pdf2odt`
 
-Now you have to download poppler for windows from https://blog.alivate.com.au/poppler-windows/. Uncompress the downloaded file.
+Now you have to download poppler for windows from https://blog.alivate.com.au/poppler-windows/. Uncompress the downloaded file. Add it's installation directory to path. 
+
+Now you haveve to download tesseract for windows fromm https://github.com/UB-Mannheim/tesseract/wiki and add it's installation directory to pathsh
 
 Now you can use it typing in windows shell:
     
