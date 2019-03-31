@@ -26,19 +26,18 @@ except:
 
 def get_pdf_num_pages(filename):
     if platform.system()=="Windows":
-        pdfinfo_command='""pdfinfo.exe" "{}""'.format( filename) #I add quotes to embrace all command too
+        pdfinfo_command='pdfinfo.exe "{}"'.format( filename) #I add quotes to embrace all command too
     else:
         pdfinfo_command="pdfinfo '{}'".format(filename)
 
-    print("Converting pdf to images")
     try:
-        output=check_output(pdfinfo_command, shell=True).decode('UTF-8')
+        output=check_output(pdfinfo_command, shell=True)
     except:
         pass
     
-    for line in output.split("\n"):
-        if line.find("Pages:")!=-1:
-            return int(line.split("Pages:")[1])
+    for line in output.split(b"\n"):
+        if line.find(b"Pages:")!=-1:
+            return int(line.split(b"Pages:")[1].decode('UTF-8'))
     return 0
 
 def process_page(args, number, numpages):
@@ -46,8 +45,8 @@ def process_page(args, number, numpages):
     pngfile="pdf2odt_temporal-{}.png".format(zfill)
     
     if platform.system()=="Windows":
-        pdftoppm_command='""pdftoppm.exe" -f {0} -l {0} -r {0} -png "{}" pdf2odt_temporal"'.format( args.resolution,  number,  args.pdf) #I add quotes to embrace all command too
-        tesseract_command='""tesseract.exe" {0} -l {1} {0}"'.format(pngfile, args.tesseract_language)#I add quotes to embrace all command too
+        pdftoppm_command='pdftoppm.exe -r {0} -f {1} -l {1} -png "{2}" pdf2odt_temporal'.format( args.resolution,  number,  args.pdf) #I add quotes to embrace all command too
+        tesseract_command='tesseract.exe {0} -l {1} {0}'.format(pngfile, args.tesseract_language)#I add quotes to embrace all command too
     else:
         pdftoppm_command="pdftoppm -png -r {0} -f {1} -l {1} '{2}' pdf2odt_temporal".format( args.resolution, number, args.pdf)
         tesseract_command="tesseract {0} -l {1} {0}".format(pngfile, args.tesseract_language)
@@ -65,7 +64,7 @@ def main(arguments=None):
     parser=argparse.ArgumentParser(prog='pdf2odt', description=_('Converts a pdf to a LibreOffice Writer document with pages as images'), epilog=_("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year)), formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('--version', action='version', version=__version__)
     parser.add_argument('--pdf', help=_("PDF file to convert"), action="store", default=None)
-    parser.add_argument('--tesseract_language', help=_("Language used in t1esseract command. Default is spa"), action="store", default="spa")
+    parser.add_argument('--tesseract_language', help=_("Language used in t1esseract command. Default is eng"), action="store", default="eng")
     parser.add_argument('--resolution', help=_("Sets DPI image resolution. Default is 300"), action="store", default="300")
     parser.add_argument('--tesseract', help=_("Uses tesseract ocr and insert result after image in ODT document"), action="store_true", default=False)
     parser.add_argument('output', help=_("Output odt file"), action="store")
@@ -81,7 +80,7 @@ def main(arguments=None):
         locale.setlocale(locale.LC_ALL, ".".join(locale.getlocale()))
     except:
         pass
-        
+
     #Launching concurrent process
     futures=[]
     from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -108,7 +107,7 @@ def main(arguments=None):
         p.addElement(doc.image(filename, cmx,cmy))
         doc.insertInCursor(p, after=True)
         if args.tesseract==True:
-            for line in open(filename +".txt", "r").readlines():
+            for line in open(filename +".txt", "r", encoding='UTF-8').readlines():
                 p=P(stylename="Standard")
                 p.addText(line)
                 doc.insertInCursor(p, after=True)
