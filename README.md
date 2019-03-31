@@ -68,6 +68,11 @@ Dependencies
 
 Changelog
 =========
+0.4.0
+-----
+  * Added OCR support with tesseract
+  * Now uses process concurrency and shows a progress bar
+
 0.3.0
 -----
   * Fixed problem with white spaces paths in windows.

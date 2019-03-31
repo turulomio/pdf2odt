@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 08:01+0100\n"
+"POT-Creation-Date: 2019-03-31 23:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,13 @@ msgstr ""
 msgid "PDF file to convert"
 msgstr ""
 
-msgid "Path to pdftoppm command"
+msgid "Language used in t1esseract command. Default is eng"
+msgstr ""
+
+msgid "Sets DPI image resolution. Default is 300"
+msgstr ""
+
+msgid "Uses tesseract ocr and insert result after image in ODT document"
 msgstr ""
 
 msgid "Output odt file"
