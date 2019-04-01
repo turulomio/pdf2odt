@@ -5,7 +5,6 @@ import platform
 import glob
 import argparse
 import gettext
-import locale
 import os
 import pkg_resources
 
@@ -17,6 +16,7 @@ from PIL import Image
 from multiprocessing import cpu_count
 from subprocess import check_output, STDOUT
 from tqdm import tqdm
+from sys import exit
 
 try:
     t=gettext.translation('pdf2odt',pkg_resources.resource_filename("pdf2odt","locale"))
@@ -40,6 +40,26 @@ def get_pdf_num_pages(filename):
             return int(line.split(b"Pages:")[1].decode('UTF-8'))
     return 0
 
+## Returns a list of tesseract supported languages
+## @return list of strings with supported languages
+def get_supported_languages():
+    if platform.system()=="Windows":
+        command='tesseract.exe --list-langs'
+    else:
+        command='tesseract --list-langs'
+
+    try:
+        output=check_output(command, shell=True)
+    except:
+        pass
+    
+    result=[]
+    lines=output.split(b"\n")[1:]
+    for line in lines:
+        if len(line)>0:
+            result.append(line.decode('UTF-8'))
+    return result
+    
 def process_page(args, number, numpages):
     zfill=str(number).zfill(len(str(numpages)))
     pngfile="pdf2odt_temporal-{}.png".format(zfill)
@@ -75,11 +95,13 @@ def main(arguments=None):
 
     numpages=get_pdf_num_pages( args.pdf)
     print(Style.BRIGHT +"Detected {} pages in {}".format(Fore.GREEN + str(numpages) + Fore.WHITE, args.pdf))
-    # Sets locale to get integer format localized strings
-    try:
-        locale.setlocale(locale.LC_ALL, ".".join(locale.getlocale()))
-    except:
-        pass
+
+    #Checks that tesseract_language is supported
+    supported_languages=get_supported_languages()
+    if args.tesseract==True:
+        if args.tesseract_language not in supported_languages:
+            print(Style.BRIGHT + Fore.RED +_("Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter").format(args.tesseract_language, supported_languages))
+            exit(1)
 
     #Launching concurrent process
     futures=[]
