@@ -24,7 +24,7 @@ try:
 except:
     _=str
 
-def get_pdf_num_pages(filename):
+def poppler_get_pdf_num_pages(filename):
     if platform.system()=="Windows":
         pdfinfo_command='pdfinfo.exe "{}"'.format( filename) #I add quotes to embrace all command too
     else:
@@ -42,7 +42,7 @@ def get_pdf_num_pages(filename):
 
 ## Returns a list of tesseract supported languages
 ## @return list of strings with supported languages
-def get_supported_languages():
+def tesseract_get_supported_languages():
     if platform.system()=="Windows":
         command='tesseract.exe --list-langs'
     else:
@@ -56,6 +56,7 @@ def get_supported_languages():
     result=[]
     lines=output.split(b"\n")[1:]
     for line in lines:
+        line=line.replace(b"\r", b"")#Needed to parse windows output
         if len(line)>0:
             result.append(line.decode('UTF-8'))
     return result
@@ -93,11 +94,11 @@ def main(arguments=None):
 
     colorama_init(autoreset=True)
 
-    numpages=get_pdf_num_pages( args.pdf)
+    numpages=poppler_get_pdf_num_pages( args.pdf)
     print(Style.BRIGHT +"Detected {} pages in {}".format(Fore.GREEN + str(numpages) + Fore.WHITE, args.pdf))
 
     #Checks that tesseract_language is supported
-    supported_languages=get_supported_languages()
+    supported_languages=tesseract_get_supported_languages()
     if args.tesseract==True:
         if args.tesseract_language not in supported_languages:
             print(Style.BRIGHT + Fore.RED +_("Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter").format(args.tesseract_language, supported_languages))
