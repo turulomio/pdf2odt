@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-31 23:55+0200\n"
+"POT-Creation-Date: 2019-04-01 21:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr ""
 msgid "PDF file to convert"
 msgstr ""
 
-msgid "Language used in t1esseract command. Default is eng"
+msgid "Language used in tesseract command. Default is eng"
 msgstr ""
 
 msgid "Sets DPI image resolution. Default is 300"
@@ -54,6 +54,9 @@ msgid "Uses tesseract ocr and insert result after image in ODT document"
 msgstr ""
 
 msgid "Output odt file"
+msgstr ""
+
+msgid "Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter"
 msgstr ""
 
 msgid "Converting PDF to ODT"

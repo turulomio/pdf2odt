@@ -68,6 +68,10 @@ Dependencies
 
 Changelog
 =========
+0.5.0
+-----
+  * Now pdf2odt detects if tesseract language selected is supported.
+
 0.4.0
 -----
   * Added OCR support with tesseract
