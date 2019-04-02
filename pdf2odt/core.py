@@ -103,7 +103,7 @@ def main(arguments=None):
         exit(1)
         
     numpages=poppler_get_pdf_num_pages( args.pdf)
-    print(Style.BRIGHT +"Detected {} pages in {}".format(Fore.GREEN + str(numpages) + Fore.WHITE, Fore.GREEN + args.pdf + Fore.WHITE))
+    print(Style.BRIGHT +_("Detected {} pages in {}").format(Fore.GREEN + str(numpages) + Fore.WHITE, Fore.GREEN + args.pdf + Fore.WHITE))
 
     #Checks that tesseract_language is supported
     supported_languages=tesseract_get_supported_languages()
@@ -112,8 +112,7 @@ def main(arguments=None):
             print(Style.BRIGHT + Fore.RED +_("Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter").format(args.tesseract_language, supported_languages))
             exit(1)
         else:
-            print(Style.BRIGHT +"Using '{}' language for Tesseract OCR.".format(Fore.GREEN + args.tesseract_language + Fore.WHITE))
-
+            print(Style.BRIGHT +_("Using '{}' language for Tesseract OCR.").format(Fore.GREEN + args.tesseract_language + Fore.WHITE))
 
     #Launching concurrent process
     futures=[]

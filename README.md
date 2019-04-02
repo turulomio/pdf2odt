@@ -68,6 +68,11 @@ Dependencies
 
 Changelog
 =========
+0.6.0
+-----
+  * Tesseract language is now showed in output
+  * Now pdf2odt validates PDF document
+
 0.5.0
 -----
   * Now pdf2odt detects if tesseract language selected is supported.

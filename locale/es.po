@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecPermissions\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-01 21:54+0200\n"
+"POT-Creation-Date: 2019-04-02 08:12+0200\n"
 "PO-Revision-Date: 2018-10-22 18:51+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
@@ -57,8 +57,17 @@ msgstr "Usa el OCR de tesseract y añade el resultado después de la imagen en e
 msgid "Output odt file"
 msgstr "Fichero odt de salida"
 
+msgid "Filename to convert is not a PDF document"
+msgstr "El fichero a convertir no es un documento PDF"
+
+msgid "Detected {} pages in {}"
+msgstr "Se han detectado {} páginas en {}"
+
 msgid "Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter"
 msgstr "El idioma '{}' no está soportado en esta instalación de tesseract. Por favor usa uno de estos idiomas {} con el parámetro --tesseract_language"
+
+msgid "Using '{}' language for Tesseract OCR."
+msgstr "Usando el idioma '{}' para el OCR de Tesseract."
 
 msgid "Converting PDF to ODT"
 msgstr "Convirtiendo el PDF a ODT"
@@ -68,4 +77,3 @@ msgstr "Convirtiendo {} a {} usando odt2pdf-{}"
 
 msgid "ODT generation took {}"
 msgstr "La generación del ODT tardó {}"
-
