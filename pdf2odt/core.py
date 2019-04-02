@@ -23,6 +23,12 @@ try:
     _=t.gettext
 except:
     _=str
+  
+## Checks if filename is a pdf  
+def poppler_check_is_pdf(filename):  
+    if poppler_get_pdf_num_pages(filename)==0:
+        return False
+    return True
 
 def poppler_get_pdf_num_pages(filename):
     if platform.system()=="Windows":
@@ -31,14 +37,12 @@ def poppler_get_pdf_num_pages(filename):
         pdfinfo_command="pdfinfo '{}'".format(filename)
 
     try:
-        output=check_output(pdfinfo_command, shell=True)
-    except:
-        pass
-    
-    for line in output.split(b"\n"):
-        if line.find(b"Pages:")!=-1:
-            return int(line.split(b"Pages:")[1].decode('UTF-8'))
-    return 0
+        output=check_output(pdfinfo_command, shell=True, stderr=STDOUT)
+        for line in output.split(b"\n"):
+            if line.find(b"Pages:")!=-1:
+                return int(line.split(b"Pages:")[1].decode('UTF-8'))
+    except:    
+        return 0
 
 ## Returns a list of tesseract supported languages
 ## @return list of strings with supported languages
@@ -48,17 +52,16 @@ def tesseract_get_supported_languages():
     else:
         command='tesseract --list-langs'
 
+    result=[]
     try:
-        output=check_output(command, shell=True)
+        output=check_output(command, shell=True, stderr=STDOUT)
+        lines=output.split(b"\n")[1:]
+        for line in lines:
+            line=line.replace(b"\r", b"")#Needed to parse windows output
+            if len(line)>0:
+                result.append(line.decode('UTF-8'))
     except:
         pass
-    
-    result=[]
-    lines=output.split(b"\n")[1:]
-    for line in lines:
-        line=line.replace(b"\r", b"")#Needed to parse windows output
-        if len(line)>0:
-            result.append(line.decode('UTF-8'))
     return result
     
 def process_page(args, number, numpages):
@@ -93,7 +96,12 @@ def main(arguments=None):
     args=parser.parse_args(arguments)
 
     colorama_init(autoreset=True)
-
+    
+    #Make PDF validation
+    if poppler_check_is_pdf(args.pdf)==False:
+        print(Style.BRIGHT + Fore.RED +_("Filename to convert is not a PDF document"))
+        exit(1)
+        
     numpages=poppler_get_pdf_num_pages( args.pdf)
     print(Style.BRIGHT +"Detected {} pages in {}".format(Fore.GREEN + str(numpages) + Fore.WHITE, args.pdf))
 
