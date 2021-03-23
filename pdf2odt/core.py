@@ -73,7 +73,7 @@ def process_page(args, number, numpages):
         tesseract_command='tesseract.exe {0} -l {1} {0}'.format(pngfile, args.tesseract_language)#I add quotes to embrace all command too
     else:
         pdftoppm_command="pdftoppm -png -r {0} -f {1} -l {1} '{2}' pdf2odt_temporal".format( args.resolution, number, args.pdf)
-        tesseract_command="tesseract {0} -l {1} {0}".format(pngfile, args.tesseract_language)
+        tesseract_command="tesseract {0} {0} -l {1}".format(pngfile, args.tesseract_language)
     check_output(pdftoppm_command, shell=True,  stderr=STDOUT)
     if args.tesseract==True:
         check_output(tesseract_command, shell=True,  stderr=STDOUT)
