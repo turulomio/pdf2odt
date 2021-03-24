@@ -68,6 +68,11 @@ Dependencies
 
 Changelog
 =========
+0.7.0
+-----
+  * Fixed bug with tesseract parameter position. Thanks @maxlem-neuralium 
+  * Now temporal files are generated with tempfile module.
+
 0.6.0
 -----
   * Tesseract language is now showed in output
