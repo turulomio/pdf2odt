@@ -1,7 +1,13 @@
 What is pdf2odt
 ===============
 
-It's a script to convert pdf to LibreOffice Writer document. Pdf pages are converted as images. It uses pdftoppm from poppler to make conversion
+'pdf2odt' is a tool developed to be able to integrate pdf files in my university notes taken with Libreoffice.
+
+Sometimes I need to edit its content but keeping the original document. So I add the converted pages to images (anchored as character) and then insert their content as text, after going through an OCR.
+
+This tool does not pretend to be a pdf file converter, cloning its format
+
+It uses pdftoppm from poppler to make conversion
 
 Links
 =====
