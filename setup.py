@@ -1,5 +1,4 @@
 from setuptools import setup, Command
-import datetime
 import gettext
 import os
 import platform
@@ -113,7 +112,7 @@ setup(name='pdf2odt',
                  'Programming Language :: Python :: 3',
                 ],
     keywords='change permissions ownner files directories',
-    url='https://github.com/Turulomio/pdf2odt',
+    url='https://github.com/turulomio/pdf2odt',
     author='Turulomio',
     author_email='turulomio@yahoo.es',
     license='GPL-3',
@@ -121,7 +120,7 @@ setup(name='pdf2odt',
     entry_points = {'console_scripts': ['pdf2odt=pdf2odt.core:main',
                                        ],
                    },
-    install_requires=['colorama','setuptools','officegenerator','pillow','tqdm'],
+    install_requires=['colorama','setuptools','officegenerator','pillow','tqdm', 'pytz'],
     data_files=[],
     cmdclass={ 'doxygen': Doxygen,
                'doc': Doc,

@@ -15,7 +15,7 @@ from platform import system as platform_system
 from officegenerator import ODT_Standard
 from odf.text import P
 from os import chdir,  path,  getcwd
-from shutil import copyfile
+from shutil import copyfile, which
 from subprocess import check_output, STDOUT
 from tempfile import TemporaryDirectory
 from tqdm import tqdm
@@ -27,6 +27,16 @@ try:
 except:
     _=str
   
+def detect_external_bins(args):
+    
+    if args.tesseract and which("tesseract") is None:
+        print(_("You must install tesseract and add it to the path"))
+        exit(4)
+    if which("pdftoppm") is None or which("pdfinfo") is None:
+        print(_("You must install poppler"))
+        exit(4)
+  
+
 ## Checks if filename is a pdf  
 def poppler_check_is_pdf(filename):  
     if poppler_get_pdf_num_pages(filename)==0:
@@ -97,6 +107,8 @@ def main(arguments=None):
     parser.add_argument('output', help=_("Output odt file"), action="store")
 
     args=parser.parse_args(arguments)
+    
+    detect_external_bins(args)
     
     cwd=getcwd()
 

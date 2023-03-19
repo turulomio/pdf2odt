@@ -11,3 +11,8 @@ cur/
 tmp/
 __pycache__/
 *.DS_Store
+.eric7project/
+.venv/
+build/
+dist/
+pdf2odt.egg-info/
