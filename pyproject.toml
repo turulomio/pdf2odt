@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pdf2odt"
+version = "0.7.0"
+description = "Converts a pdf into a Libreoffice Writer document, with images resized to A4 and anchored as character"
+authors = ["turulomio <turulomio@yahoo.es>"]
+license = "GPL-3.0 license"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+colorama = "^0.4.6"
+pillow = "^11.0.0"
+tqdm = "^4.67.1"
+unogenerator = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
