@@ -2,7 +2,7 @@
   "header": {
     "comment": "eric project file for project pdf2odt",
     "copyright": "Copyright (C) 2024 , ",
-    "saved": "2024-12-09, 09:11:25"
+    "saved": "2024-12-22, 05:57:19"
   },
   "project": {
     "AUTHOR": "",
@@ -56,7 +56,9 @@
     "MIXEDLANGUAGE": false,
     "OTHERS": [
       "README.md",
+      "pdf2odt.e4p",
       "pdf2odt.epj",
+      "poetry.toml",
       "pyproject.toml"
     ],
     "OTHERTOOLSPARMS": {},
@@ -74,8 +76,10 @@
     "SOURCES": [
       "pdf2odt/__init__.py",
       "pdf2odt/core.py",
+      "pdf2odt/poethepoet.py",
       "pdf2odt/version.py",
-      "setup.py"
+      "tests/conftest.py",
+      "tests/test_commons.py"
     ],
     "SOURCESDIR": "",
     "SPELLEXCLUDES": "",
