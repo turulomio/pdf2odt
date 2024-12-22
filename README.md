@@ -70,7 +70,7 @@ Dependencies
 
 Changelog
 =========
-0.8.0 (2024-12-22)
+1.0.0 (2024-12-22)
 ------------------
   * Migrated to unogenerator
   * Updated to poetry
