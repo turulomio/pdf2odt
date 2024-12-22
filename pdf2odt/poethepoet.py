@@ -44,3 +44,9 @@ def translate():
     system("msgfmt -cv -o pdf2odt/locale/es/LC_MESSAGES/pdf2odt.mo pdf2odt/locale/es.po")
     system("msgfmt -cv -o pdf2odt/locale/fr/LC_MESSAGES/pdf2odt.mo pdf2odt/locale/fr.po")
 
+
+def test():
+    system("pytest -W ignore")
+    
+def coverage():
+    system("coverage run -m pytest && coverage report && coverage html")

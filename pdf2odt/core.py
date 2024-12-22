@@ -12,7 +12,7 @@ from multiprocessing import cpu_count
 from pdf2odt import __versiondate__, __version__
 from platform import system as platform_system
 from unogenerator import ODT_Standard
-from os import chdir,  path,  getcwd,  system
+from os import chdir,  path,  getcwd
 from shutil import copyfile, which
 from subprocess import check_output, STDOUT
 from tempfile import TemporaryDirectory

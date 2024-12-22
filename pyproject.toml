@@ -9,11 +9,13 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 colorama = "^0.4.6"
-pillow = "^11.0.0"
 tqdm = "^4.67.1"
 unogenerator = "^1.0.0"
-pytest = "^8.3.4"
 
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.6.9"
+pytest = "^8.3.4"
 
 [build-system]
 requires = ["poetry-core"]
@@ -24,5 +26,7 @@ build-backend = "poetry.core.masonry.api"
 pdf2odt='pdf2odt.core:main'
 
 [tool.poe.tasks]
+test = { script = "pdf2odt.poethepoet:test" }
+coverage = { script = "pdf2odt.poethepoet:coverage" }
 release = { script = "pdf2odt.poethepoet:release" }
 translate = { script = "pdf2odt.poethepoet:translate" }
