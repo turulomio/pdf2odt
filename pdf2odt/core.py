@@ -6,15 +6,13 @@ from colorama import Fore, Style, init as colorama_init
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 from gettext import translation
+from importlib.resources import files
 from glob import glob
 from multiprocessing import cpu_count
-from PIL import Image
-from pdf2odt.version import __versiondate__, __version__
-from pkg_resources import resource_filename
+from pdf2odt import __versiondate__, __version__
 from platform import system as platform_system
-from officegenerator import ODT_Standard
-from odf.text import P
-from os import chdir,  path,  getcwd
+from unogenerator import ODT_Standard
+from os import chdir,  path,  getcwd,  system
 from shutil import copyfile, which
 from subprocess import check_output, STDOUT
 from tempfile import TemporaryDirectory
@@ -22,14 +20,15 @@ from tqdm import tqdm
 from sys import exit
 
 try:
-    t=translation('pdf2odt', resource_filename("pdf2odt","locale"))
+    t=translation('pdf2odt', files("pdf2odt") / 'locale')
     _=t.gettext
 except:
     _=str
+
   
-def detect_external_bins(args):
+def detect_external_bins(tesseract):
     
-    if args.tesseract and which("tesseract") is None:
+    if tesseract and which("tesseract") is None:
         print(_("You must install tesseract and add it to the path"))
         exit(4)
     if which("pdftoppm") is None or which("pdfinfo") is None:
@@ -77,18 +76,18 @@ def tesseract_get_supported_languages():
         pass
     return result
     
-def process_pdf_page(args, number, numpages):
+def process_pdf_page(tesseract, tesseract_language, resolution, number, numpages):
     zfill=str(number).zfill(len(str(numpages))) 
     if platform_system()=="Windows":
-        pdftoppm_command=f"pdftoppm.exe -r {args.resolution} -f {number} -l {number} -png file.pdf pdfpage"
-        tesseract_command=f"tesseract.exe pdfpage-{zfill}.png pdfpage-{zfill} -l {args.tesseract_language}"
+        pdftoppm_command=f"pdftoppm.exe -r {resolution} -f {number} -l {number} -png file.pdf pdfpage"
+        tesseract_command=f"tesseract.exe pdfpage-{zfill}.png pdfpage-{zfill} -l {tesseract_language}"
     else:
-        pdftoppm_command=f"pdftoppm -r {args.resolution} -f {number} -l {number} -png file.pdf pdfpage"
-        tesseract_command=f"tesseract pdfpage-{zfill}.png pdfpage-{zfill} -l {args.tesseract_language}"
+        pdftoppm_command=f"pdftoppm -r {resolution} -f {number} -l {number} -png file.pdf pdfpage"
+        tesseract_command=f"tesseract pdfpage-{zfill}.png pdfpage-{zfill} -l {tesseract_language}"
     #print(pdftoppm_command)
     #print(tesseract_command)
     check_output(pdftoppm_command, shell=True,  stderr=STDOUT)
-    if args.tesseract==True:
+    if tesseract==True:
         check_output(tesseract_command, shell=True,  stderr=STDOUT)
     return number
 
@@ -107,72 +106,62 @@ def main(arguments=None):
     parser.add_argument('output', help=_("Output odt file"), action="store")
 
     args=parser.parse_args(arguments)
+    main_command(args.pdf, args.tesseract_language, args.resolution, args.tesseract, args.output)
+    print(Style.BRIGHT + _("ODT generation took {}").format(Fore.GREEN + str(datetime.now()-start)))
+
+
+def main_command(pdf, tesseract_language, resolution, tesseract,  output):
     
-    detect_external_bins(args)
+    detect_external_bins(tesseract)
     
     cwd=getcwd()
 
     colorama_init(autoreset=True)
     
     #Make PDF validation
-    if poppler_check_is_pdf(args.pdf)==False:
+    if poppler_check_is_pdf(pdf)==False:
         print(Style.BRIGHT + Fore.RED +_("Filename to convert is not a PDF document"))
         exit(1)
         
-    numpages=poppler_get_pdf_num_pages( args.pdf)
-    print(Style.BRIGHT +_("Detected {} pages in {}").format(Fore.GREEN + str(numpages) + Fore.WHITE, Fore.GREEN + args.pdf + Fore.WHITE))
+    numpages=poppler_get_pdf_num_pages( pdf)
+    print(Style.BRIGHT +_("Detected {} pages in {}").format(Fore.GREEN + str(numpages) + Fore.WHITE, Fore.GREEN + pdf + Fore.WHITE))
 
     #Checks that tesseract_language is supported
     supported_languages=tesseract_get_supported_languages()
-    if args.tesseract==True:
-        if args.tesseract_language not in supported_languages:
-            print(Style.BRIGHT + Fore.RED +_("Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter").format(args.tesseract_language, supported_languages))
+    if tesseract==True:
+        if tesseract_language not in supported_languages:
+            print(Style.BRIGHT + Fore.RED +_("Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter").format(tesseract_language, supported_languages))
             exit(1)
         else:
-            print(Style.BRIGHT +_("Using '{}' language for Tesseract OCR.").format(Fore.GREEN + args.tesseract_language + Fore.WHITE))
+            print(Style.BRIGHT +_("Using '{}' language for Tesseract OCR.").format(Fore.GREEN + tesseract_language + Fore.WHITE))
 
 
     with TemporaryDirectory() as tmpdirname:#Exiting this with tmpdirname is deleted. To debug you must do it inside this with
         
         #Copy pdf to temporal dir
-        copyfile(args.pdf, f"{tmpdirname}/file.pdf")
+        copyfile(pdf, f"{tmpdirname}/file.pdf")
         chdir(tmpdirname)
-        
         #Launching concurrent process
         futures=[]
         executor = ProcessPoolExecutor(max_workers=cpu_count())
         for number in range(numpages):
-            futures.append(executor.submit(process_pdf_page, args, number+1, numpages))
+            futures.append(executor.submit(process_pdf_page, tesseract, tesseract_language,  resolution, number+1, numpages))
         for f in tqdm(as_completed(futures), total=len(futures)):
             pass
 
         #Generating ODT
-        doc=ODT_Standard("file.odt")
-        pdf=path.basename(args.pdf)
-        odt=path.basename(args.output)
-        doc.setMetadata(_("Converting PDF to ODT"),  _("Converting {} to {} using odt2pdf-{}").format(pdf, odt, __version__), "odt2pdf")
-        
-        for filename in sorted(glob("pdfpage*.png")):
-            img = Image.open(filename)
-            x,y=img.size
-            cmx=17
-            cmy=y*cmx/x
-            img.close()
-            doc.addImage(filename, filename)
-            p = P(stylename="Illustration")
-            p.addElement(doc.image(filename, cmx,cmy))
-            doc.insertInCursor(p, after=True)
-            if args.tesseract==True:
-                for line in open(filename[:-4] +".txt", "r", encoding='UTF-8').readlines():
-                    p=P(stylename="Standard")
-                    p.addText(line)
-                    doc.insertInCursor(p, after=True)
-        doc.save()
+        with ODT_Standard() as doc:
+            pdf=path.basename(pdf)
+            odt=path.basename(output)
+            doc.setMetadata(_("Converting PDF to ODT"),  _("Converting {} to {} using odt2pdf-{}").format(pdf, odt, __version__), "odt2pdf")
+            for filename in sorted(glob("pdfpage*.png")):
+                doc.addImageParagraph([path.abspath(filename), ], 14, None, style="Illustration", linked=False)
+                if tesseract==True:
+                    for line in open(filename[:-4] +".txt", "r", encoding='UTF-8').readlines():
+                        doc.addParagraph(line)
+            doc.save("file.odt")
         
         # Copies generated file to output
         chdir(cwd)
-        copyfile(f"{tmpdirname}/file.odt", args.output)
-   
-        #system(f"ls -la {tmpdirname}")
+        copyfile(f"{tmpdirname}/file.odt", output)
         
-    print(Style.BRIGHT + _("ODT generation took {}").format(Fore.GREEN + str(datetime.now()-start)))

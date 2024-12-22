@@ -20,6 +20,9 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 
+[tool.poetry.scripts]
+pdf2odt='pdf2odt.core:main'
+
 [tool.poe.tasks]
 release = { script = "pdf2odt.poethepoet:release" }
 translate = { script = "pdf2odt.poethepoet:translate" }
