@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-24 12:54+0100\n"
+"POT-Creation-Date: 2024-12-22 05:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "New Release:"
+msgid "You must install tesseract and add it to the path"
 msgstr ""
 
-msgid "  * Change version and date in version.py"
-msgstr ""
-
-msgid "  * Edit Changelog in README"
-msgstr ""
-
-msgid "  * Make a new tag in github"
-msgstr ""
-
-msgid "  * Create a new gentoo ebuild with the new version"
-msgstr ""
-
-msgid "  * Upload to portage repository"
+msgid "You must install poppler"
 msgstr ""
 
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
@@ -75,4 +63,22 @@ msgid "Converting {} to {} using odt2pdf-{}"
 msgstr ""
 
 msgid "ODT generation took {}"
+msgstr ""
+
+msgid "New Release:"
+msgstr ""
+
+msgid "  * Change version and date in version.py"
+msgstr ""
+
+msgid "  * Edit Changelog in README"
+msgstr ""
+
+msgid "  * Make a new tag in github"
+msgstr ""
+
+msgid "  * Create a new gentoo ebuild with the new version"
+msgstr ""
+
+msgid "  * Upload to portage repository"
 msgstr ""

@@ -1,8 +1,8 @@
 {
   "header": {
     "comment": "eric project file for project pdf2odt",
-    "copyright": "Copyright (C) 2023 , ",
-    "saved": "2023-03-19, 10:03:25"
+    "copyright": "Copyright (C) 2024 , ",
+    "saved": "2024-12-22, 05:57:19"
   },
   "project": {
     "AUTHOR": "",
@@ -11,7 +11,7 @@
     "DOCSTRING": "",
     "DOCUMENTATIONPARMS": {},
     "EMAIL": "",
-    "EMBEDDED_VENV": true,
+    "EMBEDDED_VENV": false,
     "EOL": 0,
     "FILETYPES": {
       "*.cfg": "OTHERS",
@@ -55,7 +55,11 @@
     },
     "MIXEDLANGUAGE": false,
     "OTHERS": [
-      "README.md"
+      "README.md",
+      "pdf2odt.e4p",
+      "pdf2odt.epj",
+      "poetry.toml",
+      "pyproject.toml"
     ],
     "OTHERTOOLSPARMS": {},
     "PACKAGERSPARMS": {},
@@ -70,12 +74,14 @@
     },
     "RESOURCES": [],
     "SOURCES": [
-      "__init__.py",
       "pdf2odt/__init__.py",
       "pdf2odt/core.py",
+      "pdf2odt/poethepoet.py",
       "pdf2odt/version.py",
-      "setup.py"
+      "tests/conftest.py",
+      "tests/test_commons.py"
     ],
+    "SOURCESDIR": "",
     "SPELLEXCLUDES": "",
     "SPELLLANGUAGE": "en_US",
     "SPELLWORDS": "",

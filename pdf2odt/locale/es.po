@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecPermissions\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 08:12+0200\n"
+"POT-Creation-Date: 2024-12-22 05:54+0100\n"
 "PO-Revision-Date: 2018-10-22 18:51+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
@@ -18,23 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "New Release:"
-msgstr "Nueva versión:"
+msgid "You must install tesseract and add it to the path"
+msgstr ""
 
-msgid "  * Change version and date in version.py"
-msgstr "  * Cambiar la versión y la fecha en version.py"
-
-msgid "  * Edit Changelog in README"
-msgstr "  * Modificar el Changelog en README"
-
-msgid "  * Make a new tag in github"
-msgstr "  * Hacer un nuevo tag en GitHub"
-
-msgid "  * Create a new gentoo ebuild with the new version"
-msgstr "  * Crea un nuevo ebuild de Gentoo con la nueva versión"
-
-msgid "  * Upload to portage repository"
-msgstr "  * Súbelo al repositorio del portage"
+msgid "You must install poppler"
+msgstr ""
 
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
 msgstr "Convierte un pdf a un documento de LibreOffice Writer con sus páginas como imágenes"
@@ -77,3 +65,21 @@ msgstr "Convirtiendo {} a {} usando odt2pdf-{}"
 
 msgid "ODT generation took {}"
 msgstr "La generación del ODT tardó {}"
+
+msgid "New Release:"
+msgstr "Nueva versión:"
+
+msgid "  * Change version and date in version.py"
+msgstr "  * Cambiar la versión y la fecha en version.py"
+
+msgid "  * Edit Changelog in README"
+msgstr "  * Modificar el Changelog en README"
+
+msgid "  * Make a new tag in github"
+msgstr "  * Hacer un nuevo tag en GitHub"
+
+msgid "  * Create a new gentoo ebuild with the new version"
+msgstr "  * Crea un nuevo ebuild de Gentoo con la nueva versión"
+
+msgid "  * Upload to portage repository"
+msgstr "  * Súbelo al repositorio del portage"
