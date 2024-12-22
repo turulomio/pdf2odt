@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecPermissions\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 08:12+0200\n"
+"POT-Creation-Date: 2024-12-22 05:54+0100\n"
 "PO-Revision-Date: 2018-11-03 07:11+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: French\n"
@@ -17,23 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid "New Release:"
-msgstr "Nouvelle sortie :"
+msgid "You must install tesseract and add it to the path"
+msgstr ""
 
-msgid "  * Change version and date in version.py"
-msgstr " * Changer la version et la date dans version.py"
-
-msgid "  * Edit Changelog in README"
-msgstr " * Editer le Changelog dans le README"
-
-msgid "  * Make a new tag in github"
-msgstr " * Faire un nouveau tag dans GitHub"
-
-msgid "  * Create a new gentoo ebuild with the new version"
-msgstr " * Créer un nouveau ebuild Gentoo avec la nouvelle version"
-
-msgid "  * Upload to portage repository"
-msgstr " * Uploader au dépôt de portage"
+msgid "You must install poppler"
+msgstr ""
 
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
 msgstr ""
@@ -76,6 +64,24 @@ msgstr ""
 
 msgid "ODT generation took {}"
 msgstr ""
+
+msgid "New Release:"
+msgstr "Nouvelle sortie :"
+
+msgid "  * Change version and date in version.py"
+msgstr " * Changer la version et la date dans version.py"
+
+msgid "  * Edit Changelog in README"
+msgstr " * Editer le Changelog dans le README"
+
+msgid "  * Make a new tag in github"
+msgstr " * Faire un nouveau tag dans GitHub"
+
+msgid "  * Create a new gentoo ebuild with the new version"
+msgstr " * Créer un nouveau ebuild Gentoo avec la nouvelle version"
+
+msgid "  * Upload to portage repository"
+msgstr " * Uploader au dépôt de portage"
 
 #~ msgid "If changed restart from first python setup.py doc"
 #~ msgstr "S'il y a eu modification, recommencer depuis le premier document python setup.py"

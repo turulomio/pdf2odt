@@ -17,3 +17,8 @@ unogenerator = "^1.0.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.poe.tasks]
+release = { script = "pdf2odt.poethepoet:release" }
+translate = { script = "pdf2odt.poethepoet:translate" }
