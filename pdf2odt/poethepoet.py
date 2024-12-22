@@ -21,21 +21,26 @@ def doxygen(self):
     chdir("..")
 
 def release():
-    print(_("New Release:"))
-    print(_("  * Change version and date in version.py"))
-    print(_("  * Edit Changelog in README"))
-    print("  * python setup.py doc")
-    print("  * mcedit locale/es.po")
-    print("  * python setup.py doc")
-    print("  * python setup.py install")
-    print("  * python setup.py doxygen")
-    print("  * git commit -a -m 'pdf2odt-{}'".format(__version__))
-    print("  * git push")
-    print(_("  * Make a new tag in github"))
-    print("  * python setup.py sdist upload -r pypi")
-    print("  * python setup.py uninstall")
-    print(_("  * Create a new gentoo ebuild with the new version"))
-    print(_("  * Upload to portage repository")) 
+    print("""Nueva versión:
+  * Cambiar la versión y la fecha en __init__.py
+  * Cambiar la versión en pyproject.toml
+  * Ejecutar otra vez poe release
+  * git checkout -b pdf2odt-{0}
+  * pytest
+  * Modificar el Changelog en README.md
+  * poe coverage con pyvenv
+  * poe translate
+  * linguist
+  * poe translate
+  * git commit -a -m 'pdf2odt-{0}'
+  * git push
+  * Hacer un pull request con los cambios a main
+  * Hacer un nuevo tag en GitHub
+  * git checkout main
+  * git pull
+  * poetry build
+  * poetry publish --username --password  
+""".format(__version__))
 
 def translate():
     system("xgettext -L Python --no-wrap --no-location --from-code='UTF-8' -o pdf2odt/locale/pdf2odt.pot pdf2odt/*.py")
@@ -47,6 +52,6 @@ def translate():
 
 def test():
     system("pytest -W ignore")
-    
+
 def coverage():
     system("coverage run -m pytest && coverage report && coverage html")
