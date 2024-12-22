@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-22 05:54+0100\n"
+"POT-Creation-Date: 2024-12-22 07:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,6 +44,9 @@ msgstr ""
 msgid "Output odt file"
 msgstr ""
 
+msgid "ODT generation took {}"
+msgstr ""
+
 msgid "Filename to convert is not a PDF document"
 msgstr ""
 
@@ -60,25 +63,4 @@ msgid "Converting PDF to ODT"
 msgstr ""
 
 msgid "Converting {} to {} using odt2pdf-{}"
-msgstr ""
-
-msgid "ODT generation took {}"
-msgstr ""
-
-msgid "New Release:"
-msgstr ""
-
-msgid "  * Change version and date in version.py"
-msgstr ""
-
-msgid "  * Edit Changelog in README"
-msgstr ""
-
-msgid "  * Make a new tag in github"
-msgstr ""
-
-msgid "  * Create a new gentoo ebuild with the new version"
-msgstr ""
-
-msgid "  * Upload to portage repository"
 msgstr ""

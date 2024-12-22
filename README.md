@@ -15,18 +15,15 @@ Links
 Project main page
     https://github.com/turulomio/pdf2odt/
 
-Doxygen documentation:
-    http://turulomio.users.sourceforge.net/doxygen/pdf2odt/
-
 Pypi web page:
     https://pypi.org/project/pdf2odt/
 
 Installation and use in Linux
 =============================
 
-If you use Gentoo you can find a ebuild in https://github.com/Turulomio/myportage/tree/master/dev-python/pdf2odt
+To install, you must have poppler installed to use pdftoppm command. You can use your distribution package manager.
 
-To install in other distributions, you must have poppler installed to use pdftoppm command. You can use your distribution package manager
+You also need Libreoffice with its python bindings, because unogenerator dependency will use it
 
 Then just type:
 
@@ -65,8 +62,7 @@ Dependencies
 ============
 * https://www.python.org/, as the main programming language.
 * https://pypi.org/project/colorama/, to give console colors.
-* https://pypi.org/project/pillow/, to manage png images.
-* https://github.com/turulomio/officegenerator/, to generate odt file.
+* https://github.com/turulomio/unogenerator/, to generate odt file.
 * https://poppler.freedesktop.org/, to convert pdf to images using pdftoppm.
 * https://blog.alivate.com.au/poppler-windows/ to install poppler in windows.
 * https://pypi.org/project/tqdm, to show beautyful progress bars.
@@ -74,6 +70,11 @@ Dependencies
 
 Changelog
 =========
+0.8.0 (2024-12-22)
+------------------
+  * Migrated to unogenerator
+  * Updated to poetry
+
 0.7.0
 -----
   * Fixed bug with tesseract parameter position. Thanks @maxlem-neuralium 
