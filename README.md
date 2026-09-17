@@ -5,7 +5,7 @@ What is pdf2odt
 
 Sometimes I need to edit its content but keeping the original document. So I add the converted pages to images (anchored as character) and then insert their content as text, after going through an OCR.
 
-This tool does not pretend to be a pdf file converter, cloning its format
+This tool is not intended to be a pdf file converter, cloning its format
 
 It uses pdftoppm from poppler to make conversion
 
