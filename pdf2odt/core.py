@@ -51,7 +51,9 @@ def process_pdf_page(ocr, resolution, number, numpages):
 
         if ocr == True:
             native_text = page.get_text().strip()
-            if native_text:
+            has_images = len(page.get_images()) > 0
+
+            if not has_images and native_text:
                 with open(txt_filename, "w", encoding='UTF-8') as f:
                     f.write(native_text)
             else:
@@ -61,6 +63,9 @@ def process_pdf_page(ocr, resolution, number, numpages):
                     ocr_text = "\n".join([line[1] for line in result])
                     with open(txt_filename, "w", encoding='UTF-8') as f:
                         f.write(ocr_text)
+                elif native_text:
+                    with open(txt_filename, "w", encoding='UTF-8') as f:
+                        f.write(native_text)
     return number
 
 ## pdf2odt main script
@@ -109,6 +114,7 @@ def main_command(pdf, resolution, ocr, output):
 
         #Generating ODT
         doc = Document("text")
+        doc.body.clear()
         pdf_name = path.basename(pdf)
         odt_name = path.basename(output)
         doc.meta.set_title(_("Converting PDF to ODT"))
