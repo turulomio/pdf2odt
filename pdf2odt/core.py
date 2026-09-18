@@ -11,7 +11,8 @@ from multiprocessing import cpu_count
 from pdf2odt import __versiondate__, __version__
 from odfdo import Document, Frame, Paragraph
 from PIL import Image as PILImage
-from os import chdir, path, getcwd
+from os import chdir, getcwd
+from pathlib import Path
 from shutil import copyfile
 from tempfile import TemporaryDirectory
 from tqdm import tqdm
@@ -157,8 +158,8 @@ def main_command(pdf, resolution, ocr, output):
         # Generate ODT document using odfdo
         doc = Document("text")
         doc.body.clear()
-        pdf_name = path.basename(pdf)
-        odt_name = path.basename(output)
+        pdf_name = Path(pdf).name
+        odt_name = Path(output).name
         doc.meta.set_title(_("Converting PDF to ODT"))
         doc.meta.set_subject(_("Converting {} to {} using pdf2odt-{}").format(pdf_name, odt_name, __version__))
         doc.meta.set_creator("pdf2odt")
@@ -170,7 +171,7 @@ def main_command(pdf, resolution, ocr, output):
                 width_cm = 14.0
                 height_cm = round((h_px / w_px) * width_cm, 2)
 
-            image_uri = doc.add_file(path.abspath(filename))
+            image_uri = doc.add_file(str(Path(filename).resolve()))
             frame = Frame.image_frame(
                 image=image_uri,
                 size=(f"{width_cm}cm", f"{height_cm}cm"),
@@ -181,7 +182,7 @@ def main_command(pdf, resolution, ocr, output):
             body.append(p)
 
             txt_filename = filename[:-4] + ".txt"
-            if ocr is True and path.exists(txt_filename):
+            if ocr is True and Path(txt_filename).exists():
                 with open(txt_filename, "r", encoding="UTF-8") as f:
                     for line in f.readlines():
                         text_line = line.rstrip("\r\n")
