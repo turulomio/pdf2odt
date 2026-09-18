@@ -19,6 +19,8 @@ from tempfile import TemporaryDirectory
 from tqdm import tqdm
 from sys import exit
 
+import pymupdf
+
 try:
     t=translation('pdf2odt', files("pdf2odt") / 'locale')
     _=t.gettext
@@ -27,34 +29,22 @@ except:
 
   
 def detect_external_bins(tesseract):
-    
     if tesseract and which("tesseract") is None:
         print(_("You must install tesseract and add it to the path"))
-        exit(4)
-    if which("pdftoppm") is None or which("pdfinfo") is None:
-        print(_("You must install poppler"))
         exit(4)
   
 
 ## Checks if filename is a pdf  
-def poppler_check_is_pdf(filename):  
-    if poppler_get_pdf_num_pages(filename)==0:
-        return False
-    return True
+def pdf_check_is_pdf(filename):  
+    return pdf_get_pdf_num_pages(filename) > 0
 
-def poppler_get_pdf_num_pages(filename):
-    if platform_system()=="Windows":
-        pdfinfo_command='pdfinfo.exe "{}"'.format( filename) #I add quotes to embrace all command too
-    else:
-        pdfinfo_command="pdfinfo '{}'".format(filename)
-
+def pdf_get_pdf_num_pages(filename):
     try:
-        output=check_output(pdfinfo_command, shell=True, stderr=STDOUT)
-        for line in output.split(b"\n"):
-            if line.find(b"Pages:")!=-1:
-                return int(line.split(b"Pages:")[1].decode('UTF-8'))
-    except:    
+        with pymupdf.open(filename) as doc:
+            return len(doc)
+    except:
         return 0
+
 
 ## Returns a list of tesseract supported languages
 ## @return list of strings with supported languages
@@ -78,17 +68,18 @@ def tesseract_get_supported_languages():
     
 def process_pdf_page(tesseract, tesseract_language, resolution, number, numpages):
     zfill=str(number).zfill(len(str(numpages))) 
-    if platform_system()=="Windows":
-        pdftoppm_command=f"pdftoppm.exe -r {resolution} -f {number} -l {number} -png file.pdf pdfpage"
-        tesseract_command=f"tesseract.exe pdfpage-{zfill}.png pdfpage-{zfill} -l {tesseract_language}"
-    else:
-        pdftoppm_command=f"pdftoppm -r {resolution} -f {number} -l {number} -png file.pdf pdfpage"
-        tesseract_command=f"tesseract pdfpage-{zfill}.png pdfpage-{zfill} -l {tesseract_language}"
-    #print(pdftoppm_command)
-    #print(tesseract_command)
-    check_output(pdftoppm_command, shell=True,  stderr=STDOUT)
+    png_filename = f"pdfpage-{zfill}.png"
+    with pymupdf.open("file.pdf") as doc:
+        page = doc.load_page(number - 1)
+        pix = page.get_pixmap(dpi=int(resolution))
+        pix.save(png_filename)
+
     if tesseract==True:
-        check_output(tesseract_command, shell=True,  stderr=STDOUT)
+        if platform_system()=="Windows":
+            tesseract_command=f"tesseract.exe {png_filename} pdfpage-{zfill} -l {tesseract_language}"
+        else:
+            tesseract_command=f"tesseract {png_filename} pdfpage-{zfill} -l {tesseract_language}"
+        check_output(tesseract_command, shell=True, stderr=STDOUT)
     return number
 
 ## pdf2odt main script
@@ -119,11 +110,11 @@ def main_command(pdf, tesseract_language, resolution, tesseract,  output):
     colorama_init(autoreset=True)
     
     #Make PDF validation
-    if poppler_check_is_pdf(pdf)==False:
+    if pdf_check_is_pdf(pdf)==False:
         print(Style.BRIGHT + Fore.RED +_("Filename to convert is not a PDF document"))
         exit(1)
         
-    numpages=poppler_get_pdf_num_pages( pdf)
+    numpages=pdf_get_pdf_num_pages(pdf)
     print(Style.BRIGHT +_("Detected {} pages in {}").format(Fore.GREEN + str(numpages) + Fore.WHITE, Fore.GREEN + pdf + Fore.WHITE))
 
     #Checks that tesseract_language is supported

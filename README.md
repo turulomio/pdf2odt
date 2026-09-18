@@ -1,108 +1,64 @@
-What is pdf2odt
-===============
+# pdf2odt
 
-'pdf2odt' is a tool developed to be able to integrate pdf files in my university notes taken with Libreoffice.
+`pdf2odt` is a tool developed to integrate PDF files into notes taken with LibreOffice Writer.
 
-Sometimes I need to edit its content but keeping the original document. So I add the converted pages to images (anchored as character) and then insert their content as text, after going through an OCR.
+Sometimes you need to edit the content while keeping the original document layout. It converts PDF pages into images (anchored as characters in A4) and optionally inserts their content as text after going through OCR.
 
-This tool is not intended to be a pdf file converter, cloning its format
+This tool is not intended to be a 1:1 PDF format cloner.
 
-It uses pdftoppm from poppler to make conversion
+It uses [PyMuPDF](https://pypi.org/project/pymupdf/) (MuPDF) to perform the conversion.
 
-Links
-=====
+## Links
 
-Project main page
-    https://github.com/turulomio/pdf2odt/
+- **Project main page:** [https://github.com/turulomio/pdf2odt/](https://github.com/turulomio/pdf2odt/)
+- **PyPI web page:** [https://pypi.org/project/pdf2odt/](https://pypi.org/project/pdf2odt/)
 
-Pypi web page:
-    https://pypi.org/project/pdf2odt/
+## Installation and use in Linux
 
-Installation and use in Linux
-=============================
-
-To install, you must have poppler installed to use pdftoppm command. You can use your distribution package manager.
-
-You also need Libreoffice with its python bindings, because unogenerator dependency will use it
+You need **LibreOffice** with its Python UNO bindings, because the `unogenerator` dependency uses it.
 
 Then just type:
 
-`pip install pdf2odt`
+```bash
+pip install pdf2odt
+```
 
-Once installed you can use it typing:
+Once installed, you can use it by typing:
 
-`pdf2odt --pdf doc.pdf doc.odt`
+```bash
+pdf2odt --pdf doc.pdf doc.odt
+```
 
-If you want OCR, you have to install tesseract application then you have to run 
+If you want OCR, install the `tesseract` application and run:
 
-`pdf2odt --pdf doc.pdf --tesseract doc.odt`
+```bash
+pdf2odt --pdf doc.pdf --tesseract doc.odt
+```
 
-Installation and use in Windows
-===============================
+## Installation and use in Windows
 
-You need python installed. It works with the latest version. Don't forget to add python executables to PATH, marking it in the installation process.
+You need Python installed. It works with the latest version. Don't forget to add Python executables to PATH during the installation process.
 
 Then just type:
 
-`pip install pdf2odt`
+```cmd
+pip install pdf2odt
+```
 
-Now you have to download poppler for windows from https://blog.alivate.com.au/poppler-windows/. Uncompress the downloaded file and add its installation directory to Windows environment path. Here you have how to do it https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/ 
+Now you can use it by typing in the Windows shell:
 
+```cmd
+pdf2odt --pdf doc.pdf doc.odt
+```
 
-Now you can use it typing in windows shell:
+If you want OCR, download [Tesseract for Windows](https://github.com/UB-Mannheim/tesseract/wiki) and add its installation directory to the Windows environment PATH:
 
-`pdf2odt --pdf doc.pdf doc.odt`
+```cmd
+pdf2odt --pdf doc.pdf --tesseract doc.odt
+```
 
-If you want OCR, ou have to download tesseract for windows fromm https://github.com/UB-Mannheim/tesseract/wiki. Then you have to add its installation directory to Windows environment path too.
+## Dependencies
 
-`pdf2odt --pdf doc.pdf --tesseract doc.odt`
-
-
-Dependencies
-============
-* https://www.python.org/, as the main programming language.
-* https://pypi.org/project/colorama/, to give console colors.
-* https://github.com/turulomio/unogenerator/, to generate odt file.
-* https://poppler.freedesktop.org/, to convert pdf to images using pdftoppm.
-* https://blog.alivate.com.au/poppler-windows/ to install poppler in windows.
-* https://pypi.org/project/tqdm, to show beautyful progress bars.
-* https://github.com/tesseract-ocr/, for OCR support.
-
-Changelog
-=========
-1.0.0 (2024-12-22)
-------------------
-  * Migrated to unogenerator
-  * Updated to poetry
-
-0.7.0
------
-  * Fixed bug with tesseract parameter position. Thanks @maxlem-neuralium 
-  * Now temporal files are generated with tempfile module.
-
-0.6.0
------
-  * Tesseract language is now showed in output
-  * Now pdf2odt validates PDF document
-
-0.5.0
------
-  * Now pdf2odt detects if tesseract language selected is supported.
-
-0.4.0
------
-  * Added OCR support with tesseract
-  * Now uses process concurrency and shows a progress bar
-
-0.3.0
------
-  * Fixed problem with white spaces paths in windows.
-  * Improved metadata information.
-
-0.2.0
------
-  * Now works on Windows with popper for windows installation
-
-0.1.0
------
-  * Basic functionality
+- [unogenerator](https://github.com/turulomio/unogenerator/): to generate ODT files.
+- [PyMuPDF](https://pypi.org/project/pymupdf/): to convert PDF to images using PyMuPDF.
+- [Tesseract OCR](https://github.com/tesseract-ocr/): for OCR support.

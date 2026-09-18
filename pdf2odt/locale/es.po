@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecPermissions\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-22 07:09+0100\n"
+"POT-Creation-Date: 2026-09-18 11:48+0200\n"
 "PO-Revision-Date: 2018-10-22 18:51+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
@@ -19,9 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "You must install tesseract and add it to the path"
-msgstr ""
-
-msgid "You must install poppler"
 msgstr ""
 
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
