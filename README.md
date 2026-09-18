@@ -6,7 +6,7 @@ Sometimes you need to edit the content while keeping the original document layou
 
 This tool is not intended to be a 1:1 PDF format cloner.
 
-It uses [PyMuPDF](https://pypi.org/project/pymupdf/) to render pages and extract native text, and [RapidOCR](https://pypi.org/project/rapidocr-onnxruntime/) for OCR.
+It uses [PyMuPDF](https://pypi.org/project/pymupdf/) to render pages and extract native text, [RapidOCR](https://pypi.org/project/rapidocr-onnxruntime/) for OCR, and [odfdo](https://pypi.org/project/odfdo/) to generate the ODT document.
 
 ## Links
 
@@ -15,9 +15,7 @@ It uses [PyMuPDF](https://pypi.org/project/pymupdf/) to render pages and extract
 
 ## Installation and use in Linux
 
-You need **LibreOffice** with its Python UNO bindings, because the `unogenerator` dependency uses it.
-
-Then just type:
+Install via `pip`:
 
 ```bash
 pip install pdf2odt
@@ -59,7 +57,7 @@ pdf2odt --pdf doc.pdf --ocr doc.odt
 
 ## Dependencies
 
-- [unogenerator](https://github.com/turulomio/unogenerator/): to generate ODT files.
+- [odfdo](https://pypi.org/project/odfdo/): to generate ODT files.
 - [PyMuPDF](https://pypi.org/project/pymupdf/): to convert PDF to images and extract native text.
 - [rapidocr-onnxruntime](https://pypi.org/project/rapidocr-onnxruntime/): for OCR text extraction on scanned images.
 - [tqdm](https://pypi.org/project/tqdm/): to show progress bars.

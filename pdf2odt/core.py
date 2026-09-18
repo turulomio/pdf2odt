@@ -10,7 +10,8 @@ from importlib.resources import files
 from glob import glob
 from multiprocessing import cpu_count
 from pdf2odt import __versiondate__, __version__
-from unogenerator import ODT_Standard
+from odfdo import Document, Frame, Paragraph
+from PIL import Image as PILImage
 from os import chdir, path, getcwd
 from shutil import copyfile
 from tempfile import TemporaryDirectory
@@ -107,17 +108,39 @@ def main_command(pdf, resolution, ocr, output):
             pass
 
         #Generating ODT
-        with ODT_Standard() as doc:
-            pdf=path.basename(pdf)
-            odt=path.basename(output)
-            doc.setMetadata(_("Converting PDF to ODT"), _("Converting {} to {} using odt2pdf-{}").format(pdf, odt, __version__), "odt2pdf")
-            for filename in sorted(glob("pdfpage*.png")):
-                doc.addImageParagraph([path.abspath(filename), ], 14, None, style="Illustration", linked=False)
-                txt_filename = filename[:-4] + ".txt"
-                if ocr==True and path.exists(txt_filename):
-                    for line in open(txt_filename, "r", encoding='UTF-8').readlines():
-                        doc.addParagraph(line.rstrip("\r\n"))
-            doc.save("file.odt")
+        doc = Document("text")
+        pdf_name = path.basename(pdf)
+        odt_name = path.basename(output)
+        doc.meta.set_title(_("Converting PDF to ODT"))
+        doc.meta.set_subject(_("Converting {} to {} using pdf2odt-{}").format(pdf_name, odt_name, __version__))
+        doc.meta.set_creator("pdf2odt")
+
+        body = doc.body
+        for filename in sorted(glob("pdfpage*.png")):
+            with PILImage.open(filename) as img:
+                w_px, h_px = img.size
+                width_cm = 14.0
+                height_cm = round((h_px / w_px) * width_cm, 2)
+
+            image_uri = doc.add_file(path.abspath(filename))
+            frame = Frame.image_frame(
+                image=image_uri,
+                size=(f"{width_cm}cm", f"{height_cm}cm"),
+                anchor_type="as-char",
+            )
+            p = Paragraph()
+            p.append(frame)
+            body.append(p)
+
+            txt_filename = filename[:-4] + ".txt"
+            if ocr == True and path.exists(txt_filename):
+                with open(txt_filename, "r", encoding="UTF-8") as f:
+                    for line in f.readlines():
+                        text_line = line.rstrip("\r\n")
+                        if text_line:
+                            body.append(Paragraph(text_line))
+
+        doc.save("file.odt")
         
         # Copies generated file to output
         chdir(cwd)

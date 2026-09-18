@@ -1,21 +1,26 @@
-from unogenerator import can_import_uno
-if can_import_uno():
-    from pdf2odt.core import main_command
-    from os import path,  remove
-    from unogenerator import ODT_Standard
-    
-    def test_main(libreoffice_server):
-        # Creates a pdf
-        with ODT_Standard(server=libreoffice_server) as doc:
-            doc.addParagraph("Hello world!")
-            doc.export_pdf("main.pdf")
-            
-        assert path.exists("main.pdf")
-        
-        main_command("main.pdf", 300, True, "main.odt")
-        
-        assert path.exists("main.odt")
-        
-        remove("main.pdf")
-        remove("main.odt")
-        
+import pymupdf
+from os import path, remove
+from pdf2odt.core import main_command
+from odfdo import Document
+
+
+def test_main():
+    # Creates a pdf using pymupdf
+    doc = pymupdf.open()
+    page = doc.new_page()
+    page.insert_text((50, 72), "Hello world!")
+    doc.save("main.pdf")
+    doc.close()
+
+    assert path.exists("main.pdf")
+
+    main_command("main.pdf", 300, True, "main.odt")
+
+    assert path.exists("main.odt")
+
+    odt_doc = Document("main.odt")
+    assert len(odt_doc.body.frames) > 0
+    assert odt_doc.body.frames[0].get_attribute("text:anchor-type") == "as-char"
+
+    remove("main.pdf")
+    remove("main.odt")
