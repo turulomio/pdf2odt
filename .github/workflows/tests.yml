@@ -31,8 +31,5 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction
 
-      - name: Run Tests
-        run: poetry run poe test
-
       - name: Run Coverage
         run: poetry run poe coverage
