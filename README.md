@@ -2,11 +2,11 @@
 
 `pdf2odt` is a tool developed to integrate PDF files into notes taken with LibreOffice Writer.
 
-Sometimes you need to edit the content while keeping the original document layout. It converts PDF pages into images (anchored as characters in A4) and optionally inserts their content as text after going through OCR.
+Sometimes you need to edit the content while keeping the original document layout. It converts PDF pages into images (anchored as characters in A4) and optionally extracts and inserts their content as text (using native text extraction via PyMuPDF or OCR via RapidOCR for scanned pages).
 
 This tool is not intended to be a 1:1 PDF format cloner.
 
-It uses [PyMuPDF](https://pypi.org/project/pymupdf/) (MuPDF) to perform the conversion.
+It uses [PyMuPDF](https://pypi.org/project/pymupdf/) to render pages and extract native text, and [RapidOCR](https://pypi.org/project/rapidocr-onnxruntime/) for OCR.
 
 ## Links
 
@@ -29,10 +29,10 @@ Once installed, you can use it by typing:
 pdf2odt --pdf doc.pdf doc.odt
 ```
 
-If you want OCR, install the `tesseract` application and run:
+If you want to extract and insert text (using native text extraction or OCR):
 
 ```bash
-pdf2odt --pdf doc.pdf --tesseract doc.odt
+pdf2odt --pdf doc.pdf --ocr doc.odt
 ```
 
 ## Installation and use in Windows
@@ -51,14 +51,17 @@ Now you can use it by typing in the Windows shell:
 pdf2odt --pdf doc.pdf doc.odt
 ```
 
-If you want OCR, download [Tesseract for Windows](https://github.com/UB-Mannheim/tesseract/wiki) and add its installation directory to the Windows environment PATH:
+With text extraction / OCR:
 
 ```cmd
-pdf2odt --pdf doc.pdf --tesseract doc.odt
+pdf2odt --pdf doc.pdf --ocr doc.odt
 ```
 
 ## Dependencies
 
 - [unogenerator](https://github.com/turulomio/unogenerator/): to generate ODT files.
-- [PyMuPDF](https://pypi.org/project/pymupdf/): to convert PDF to images using PyMuPDF.
-- [Tesseract OCR](https://github.com/tesseract-ocr/): for OCR support.
+- [PyMuPDF](https://pypi.org/project/pymupdf/): to convert PDF to images and extract native text.
+- [rapidocr-onnxruntime](https://pypi.org/project/rapidocr-onnxruntime/): for OCR text extraction on scanned images.
+- [tqdm](https://pypi.org/project/tqdm/): to show progress bars.
+- [colorama](https://pypi.org/project/colorama/): to format console colors.
+

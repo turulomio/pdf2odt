@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RecPermissions\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 11:48+0200\n"
+"POT-Creation-Date: 2026-09-18 11:59+0200\n"
 "PO-Revision-Date: 2018-10-22 18:51+0100\n"
 "Last-Translator: root <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
@@ -17,9 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "You must install tesseract and add it to the path"
-msgstr ""
 
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
 msgstr "Convierte un pdf a un documento de LibreOffice Writer con sus páginas como imágenes"
@@ -30,14 +27,11 @@ msgstr "Desarrollado por Mariano Muñoz 2019-{}"
 msgid "PDF file to convert"
 msgstr "Fichero PDF a convertir"
 
-msgid "Language used in tesseract command. Default is eng"
-msgstr "Idioma a usar en el comando tesseract. Por defecto es eng"
-
 msgid "Sets DPI image resolution. Default is 300"
 msgstr "Establece la resolución de la imagen en DPI. Por defecto es 300"
 
-msgid "Uses tesseract ocr and insert result after image in ODT document"
-msgstr "Usa el OCR de tesseract y añade el resultado después de la imagen en el documento ODT"
+msgid "Extracts text with page.get_text() or OCR and inserts result after image in ODT document"
+msgstr ""
 
 msgid "Output odt file"
 msgstr "Fichero odt de salida"
@@ -51,17 +45,23 @@ msgstr "El fichero a convertir no es un documento PDF"
 msgid "Detected {} pages in {}"
 msgstr "Se han detectado {} páginas en {}"
 
-msgid "Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter"
-msgstr "El idioma '{}' no está soportado en esta instalación de tesseract. Por favor usa uno de estos idiomas {} con el parámetro --tesseract_language"
-
-msgid "Using '{}' language for Tesseract OCR."
-msgstr "Usando el idioma '{}' para el OCR de Tesseract."
-
 msgid "Converting PDF to ODT"
 msgstr "Convirtiendo el PDF a ODT"
 
 msgid "Converting {} to {} using odt2pdf-{}"
 msgstr "Convirtiendo {} a {} usando odt2pdf-{}"
+
+#~ msgid "Language used in tesseract command. Default is eng"
+#~ msgstr "Idioma a usar en el comando tesseract. Por defecto es eng"
+
+#~ msgid "Uses tesseract ocr and insert result after image in ODT document"
+#~ msgstr "Usa el OCR de tesseract y añade el resultado después de la imagen en el documento ODT"
+
+#~ msgid "Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter"
+#~ msgstr "El idioma '{}' no está soportado en esta instalación de tesseract. Por favor usa uno de estos idiomas {} con el parámetro --tesseract_language"
+
+#~ msgid "Using '{}' language for Tesseract OCR."
+#~ msgstr "Usando el idioma '{}' para el OCR de Tesseract."
 
 #~ msgid "New Release:"
 #~ msgstr "Nueva versión:"

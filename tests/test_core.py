@@ -12,7 +12,7 @@ if can_import_uno():
             
         assert path.exists("main.pdf")
         
-        main_command("main.pdf",  "eng",  300,  True,  "main.odt")
+        main_command("main.pdf", 300, True, "main.odt")
         
         assert path.exists("main.odt")
         
