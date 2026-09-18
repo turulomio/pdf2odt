@@ -1,65 +1,136 @@
 # pdf2odt
 
-`pdf2odt` is a tool developed to integrate PDF files into notes taken with LibreOffice Writer.
+**pdf2odt** is a Python command-line utility and library that converts PDF documents into **LibreOffice Writer (.odt)** documents.
 
-Sometimes you need to edit the content while keeping the original document layout. It converts PDF pages into images (anchored as characters in A4) and optionally extracts and inserts their content as text (using native text extraction via PyMuPDF or OCR via RapidOCR for scanned pages).
+It converts each PDF page into a high-resolution image anchored as a character in an A4 page layout, and optionally extracts text (using native vector text extraction or embedded OCR for scanned documents) and appends it after each page image.
 
-This tool is not intended to be a 1:1 PDF format cloner.
+---
 
-It uses [PyMuPDF](https://pypi.org/project/pymupdf/) to render pages and extract native text, [RapidOCR](https://pypi.org/project/rapidocr-onnxruntime/) for OCR, and [odfdo](https://pypi.org/project/odfdo/) to generate the ODT document.
+## Key Features
 
-## Links
+- **100% Pure Python & Self-Contained:** No need to install external system tools such as Poppler, Tesseract, or LibreOffice. Everything is installed via `pip`.
+- **High-Quality Page Rendering:** Uses [PyMuPDF](https://pypi.org/project/pymupdf/) (MuPDF) for fast and pixel-perfect rendering to PNG images with configurable DPI resolution.
+- **Smart Hybrid Text Extraction & OCR:**
+  - Extracts native vector text directly from digital PDFs with 100% accuracy and near-zero latency.
+  - Automatically runs [RapidOCR](https://pypi.org/project/rapidocr-onnxruntime/) (ONNX Runtime) on scanned images or bitmap pages to recognize text.
+- **Character-Anchored Images (`as-char`):** Page images are embedded in the ODT document using [odfdo](https://pypi.org/project/odfdo/) with proportional dimensions and anchored as characters, ensuring consistent layout in LibreOffice Writer.
+- **Fast & Multi-Threaded:** Uses Python thread pooling to process pages concurrently across all available CPU cores.
 
-- **Project main page:** [https://github.com/turulomio/pdf2odt/](https://github.com/turulomio/pdf2odt/)
-- **PyPI web page:** [https://pypi.org/project/pdf2odt/](https://pypi.org/project/pdf2odt/)
+---
 
-## Installation and use in Linux
+## Installation
 
-Install via `pip`:
+Install `pdf2odt` using `pip`:
 
 ```bash
 pip install pdf2odt
 ```
 
-Once installed, you can use it by typing:
+Or using Poetry:
 
 ```bash
-pdf2odt --pdf doc.pdf doc.odt
+poetry add pdf2odt
 ```
 
-If you want to extract and insert text (using native text extraction or OCR):
+---
+
+## Command-Line Usage
+
+### 1. Basic Conversion
+Convert a PDF into an ODT document (renders pages at default 300 DPI):
 
 ```bash
-pdf2odt --pdf doc.pdf --ocr doc.odt
+pdf2odt --pdf document.pdf output.odt
 ```
 
-## Installation and use in Windows
+### 2. Conversion with Text Extraction / OCR
+Extract native text and perform OCR on images, inserting the text below each page image in the ODT document:
 
-You need Python installed. It works with the latest version. Don't forget to add Python executables to PATH during the installation process.
-
-Then just type:
-
-```cmd
-pip install pdf2odt
+```bash
+pdf2odt --pdf document.pdf --ocr output.odt
 ```
 
-Now you can use it by typing in the Windows shell:
+### 3. Custom Image Resolution
+Set a custom image resolution in DPI (default is 300 DPI; use lower values like 150 DPI for smaller file sizes):
 
-```cmd
-pdf2odt --pdf doc.pdf doc.odt
+```bash
+pdf2odt --pdf document.pdf --resolution 150 output.odt
 ```
 
-With text extraction / OCR:
+### 4. Full Options Reference
 
-```cmd
-pdf2odt --pdf doc.pdf --ocr doc.odt
+```text
+usage: pdf2odt [-h] [--version] --pdf PDF [--resolution RESOLUTION] [--ocr] output
+
+Converts a pdf to a LibreOffice Writer document with pages as images
+
+positional arguments:
+  output                Output odt file
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --pdf PDF             PDF file to convert
+  --resolution RESOLUTION
+                        Sets DPI image resolution. Default is 300
+  --ocr                 Extracts text with page.get_text() or OCR and inserts result after image in ODT document
 ```
+
+---
+
+## Python API Usage
+
+You can also use `pdf2odt` directly in your Python applications:
+
+```python
+from pdf2odt.core import main_command
+
+# Convert a PDF to ODT with 300 DPI and OCR enabled
+main_command(
+    pdf="path/to/document.pdf",
+    resolution=300,
+    ocr=True,
+    output="path/to/output.odt"
+)
+```
+
+---
 
 ## Dependencies
 
-- [odfdo](https://pypi.org/project/odfdo/): to generate ODT files.
-- [PyMuPDF](https://pypi.org/project/pymupdf/): to convert PDF to images and extract native text.
-- [rapidocr-onnxruntime](https://pypi.org/project/rapidocr-onnxruntime/): for OCR text extraction on scanned images.
-- [tqdm](https://pypi.org/project/tqdm/): to show progress bars.
-- [colorama](https://pypi.org/project/colorama/): to format console colors.
+`pdf2odt` relies on the following Python packages:
+
+- [PyMuPDF](https://pypi.org/project/pymupdf/): High-performance PDF rendering and native text extraction.
+- [odfdo](https://pypi.org/project/odfdo/): Pure Python OpenDocument (.odt) document generator.
+- [rapidocr-onnxruntime](https://pypi.org/project/rapidocr-onnxruntime/): Lightweight ONNX-powered OCR engine.
+- [Pillow](https://pypi.org/project/pillow/): Image dimension and format processing.
+- [tqdm](https://pypi.org/project/tqdm/): Console progress bar.
+- [colorama](https://pypi.org/project/colorama/): Colored terminal output.
+
+---
+
+## Development & Testing
+
+This project uses [Poetry](https://python-poetry.org/) and [Poe the Poet](https://github.com/nat-n/poethepoet) for development tasks.
+
+### Run Tests
+```bash
+poetry run poe test
+```
+
+### Run Coverage Report
+```bash
+poetry run poe coverage
+```
+
+### Update Translations
+```bash
+poetry run poe translate
+```
+
+---
+
+## License
+
+Distributed under the **GPL-3.0 License**.
 

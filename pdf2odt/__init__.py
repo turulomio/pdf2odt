@@ -1,3 +1,5 @@
+"""pdf2odt package initialization."""
+
 from datetime import date
 
 __versiondate__ = date(2024, 12, 22)

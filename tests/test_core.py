@@ -1,3 +1,5 @@
+"""Test suite for pdf2odt core functionality."""
+
 import pytest
 import pymupdf
 from os import path, remove
@@ -7,7 +9,7 @@ from pdf2odt.core import main, main_command, pdf_check_is_pdf, pdf_get_pdf_num_p
 
 
 def test_pdf_with_text():
-    # 1. Creates a multi-page PDF with only native text
+    """Test converting a multi-page PDF containing pure vector text."""
     pdf_path = "test_text.pdf"
     odt_path = "test_text.odt"
 
@@ -40,7 +42,7 @@ def test_pdf_with_text():
 
 
 def test_pdf_with_images():
-    # 2. Creates a PDF with only a scanned image (bitmap, no native text layer)
+    """Test converting a PDF containing a scanned bitmap image via RapidOCR."""
     img_path = "temp_scanned.png"
     pdf_path = "test_scanned.pdf"
     odt_path = "test_scanned.odt"
@@ -78,7 +80,7 @@ def test_pdf_with_images():
 
 
 def test_pdf_with_text_and_images():
-    # 3. Creates a PDF with both an image (containing text) and native vector text
+    """Test converting a PDF containing both native text and an embedded image with text."""
     img_path = "temp_mixed.png"
     pdf_path = "test_mixed.pdf"
     odt_path = "test_mixed.odt"
@@ -118,7 +120,7 @@ def test_pdf_with_text_and_images():
 
 
 def test_pdf_without_ocr():
-    # 4. Conversion without OCR flag
+    """Test converting a PDF when OCR extraction is disabled (--ocr flag omitted)."""
     pdf_path = "test_no_ocr.pdf"
     odt_path = "test_no_ocr.odt"
 
@@ -142,7 +144,7 @@ def test_pdf_without_ocr():
 
 
 def test_invalid_pdf():
-    # 5. Non-existent and invalid file handling
+    """Test error handling when supplied with non-existent or invalid PDF files."""
     assert pdf_get_pdf_num_pages("non_existent_file.pdf") == 0
     assert pdf_check_is_pdf("non_existent_file.pdf") is False
 
@@ -152,7 +154,7 @@ def test_invalid_pdf():
 
 
 def test_pdf_with_blank_image_and_native_text():
-    # 7. Test page with non-text image + native text (triggers fallback)
+    """Test page containing a non-text image alongside native text."""
     img_path = "temp_blank.png"
     pdf_path = "test_blank.pdf"
     odt_path = "test_blank.odt"
@@ -180,7 +182,7 @@ def test_pdf_with_blank_image_and_native_text():
 
 
 def test_main_cli():
-    # 8. Test CLI entry point main()
+    """Test CLI invocation using main() entry point with argument list."""
     pdf_path = "test_cli.pdf"
     odt_path = "test_cli.odt"
 
