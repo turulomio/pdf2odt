@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-22 07:11+0100\n"
+"POT-Creation-Date: 2026-09-18 12:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,12 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "You must install tesseract and add it to the path"
-msgstr ""
-
-msgid "You must install poppler"
-msgstr ""
 
 msgid "Converts a pdf to a LibreOffice Writer document with pages as images"
 msgstr ""
@@ -32,13 +26,10 @@ msgstr ""
 msgid "PDF file to convert"
 msgstr ""
 
-msgid "Language used in tesseract command. Default is eng"
-msgstr ""
-
 msgid "Sets DPI image resolution. Default is 300"
 msgstr ""
 
-msgid "Uses tesseract ocr and insert result after image in ODT document"
+msgid "Extracts text with page.get_text() or OCR and inserts result after image in ODT document"
 msgstr ""
 
 msgid "Output odt file"
@@ -53,14 +44,8 @@ msgstr ""
 msgid "Detected {} pages in {}"
 msgstr ""
 
-msgid "Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter"
-msgstr ""
-
-msgid "Using '{}' language for Tesseract OCR."
-msgstr ""
-
 msgid "Converting PDF to ODT"
 msgstr ""
 
-msgid "Converting {} to {} using odt2pdf-{}"
+msgid "Converting {} to {} using pdf2odt-{}"
 msgstr ""

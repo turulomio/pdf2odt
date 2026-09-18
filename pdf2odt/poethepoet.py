@@ -1,26 +1,19 @@
+"""Development and maintenance tasks executed via poethepoet."""
+
 from gettext import translation
 from importlib.resources import files
-from os import system, chdir
+from os import system
 from pdf2odt import __version__
 
 try:
-    t=translation('pdf2odt', files("pdf2odt") / 'locale')
-    _=t.gettext
-except:
-    _=str
+    t = translation('pdf2odt', files("pdf2odt") / 'locale')
+    _ = t.gettext
+except Exception:
+    _ = str
 
-
-def doxygen(self):
-    print("Creating Doxygen Documentation")
-    system("""sed -i -e "41d" doc/Doxyfile""")#Delete line 41
-    system("""sed -i -e "41iPROJECT_NUMBER         = {}" doc/Doxyfile""".format(__version__))#Insert line 41
-    system("rm -Rf build")
-    chdir("doc")
-    system("doxygen Doxyfile")
-    system("rsync -avzP -e 'ssh -l turulomio' html/ frs.sourceforge.net:/home/users/t/tu/turulomio/userweb/htdocs/doxygen/pdf2odt/ --delete-after")
-    chdir("..")
 
 def release():
+    """Print the checklist of steps for releasing a new version."""
     print("""Nueva versión:
   * Cambiar la versión y la fecha en __init__.py
   * Cambiar la versión en pyproject.toml
@@ -42,7 +35,9 @@ def release():
   * poetry publish --username --password  
 """.format(__version__))
 
+
 def translate():
+    """Extract translatable strings and compile gettext message catalogs."""
     system("xgettext -L Python --no-wrap --no-location --from-code='UTF-8' -o pdf2odt/locale/pdf2odt.pot pdf2odt/*.py")
     system("msgmerge -N --no-wrap -U pdf2odt/locale/es.po pdf2odt/locale/pdf2odt.pot")
     system("msgmerge -N --no-wrap -U pdf2odt/locale/fr.po pdf2odt/locale/pdf2odt.pot")
@@ -51,7 +46,10 @@ def translate():
 
 
 def test():
+    """Run test suite using pytest."""
     system("pytest -W ignore")
 
+
 def coverage():
+    """Run test suite and generate terminal and HTML coverage reports."""
     system("coverage run -m pytest && coverage report && coverage html")

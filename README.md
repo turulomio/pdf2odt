@@ -1,108 +1,141 @@
-What is pdf2odt
-===============
+# pdf2odt
 
-'pdf2odt' is a tool developed to be able to integrate pdf files in my university notes taken with Libreoffice.
+[![Tests](https://github.com/turulomio/pdf2odt/actions/workflows/tests.yml/badge.svg)](https://github.com/turulomio/pdf2odt/actions/workflows/tests.yml)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/pdf2odt)](https://pypi.org/project/pdf2odt/)
+[![PyPI version](https://img.shields.io/pypi/v/pdf2odt)](https://pypi.org/project/pdf2odt/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-Sometimes I need to edit its content but keeping the original document. So I add the converted pages to images (anchored as character) and then insert their content as text, after going through an OCR.
+**pdf2odt** is a Python command-line utility and library that converts PDF documents into **LibreOffice Writer (.odt)** documents.
 
-This tool is not intended to be a pdf file converter, cloning its format
+It converts each PDF page into a high-resolution image anchored as a character in an A4 page layout, and optionally extracts text (using native vector text extraction or embedded OCR for scanned documents) and appends it after each page image.
 
-It uses pdftoppm from poppler to make conversion
+---
 
-Links
-=====
+## Key Features
 
-Project main page
-    https://github.com/turulomio/pdf2odt/
+- **100% Pure Python & Self-Contained:** No need to install external system tools such as Poppler, Tesseract, or LibreOffice. Everything is installed via `pip`.
+- **High-Quality Page Rendering:** Uses [PyMuPDF](https://pypi.org/project/pymupdf/) (MuPDF) for fast and pixel-perfect rendering to PNG images with configurable DPI resolution.
+- **Smart Hybrid Text Extraction & OCR:**
+  - Extracts native vector text directly from digital PDFs with 100% accuracy and near-zero latency.
+  - Automatically runs [RapidOCR](https://pypi.org/project/rapidocr-onnxruntime/) (ONNX Runtime) on scanned images or bitmap pages to recognize text.
+- **Character-Anchored Images (`as-char`):** Page images are embedded in the ODT document using [odfdo](https://pypi.org/project/odfdo/) with proportional dimensions and anchored as characters, ensuring consistent layout in LibreOffice Writer.
+- **Fast & Multi-Threaded:** Uses Python thread pooling to process pages concurrently across all available CPU cores.
 
-Pypi web page:
-    https://pypi.org/project/pdf2odt/
+---
 
-Installation and use in Linux
-=============================
+## Installation
 
-To install, you must have poppler installed to use pdftoppm command. You can use your distribution package manager.
+Install `pdf2odt` using `pip`:
 
-You also need Libreoffice with its python bindings, because unogenerator dependency will use it
+```bash
+pip install pdf2odt
+```
 
-Then just type:
+Or using Poetry:
 
-`pip install pdf2odt`
+```bash
+poetry add pdf2odt
+```
 
-Once installed you can use it typing:
+---
 
-`pdf2odt --pdf doc.pdf doc.odt`
+## Command-Line Usage
 
-If you want OCR, you have to install tesseract application then you have to run 
+### 1. Basic Conversion
+Convert a PDF into an ODT document (renders pages at default 300 DPI):
 
-`pdf2odt --pdf doc.pdf --tesseract doc.odt`
+```bash
+pdf2odt --pdf document.pdf output.odt
+```
 
-Installation and use in Windows
-===============================
+### 2. Conversion with Text Extraction / OCR
+Extract native text and perform OCR on images, inserting the text below each page image in the ODT document:
 
-You need python installed. It works with the latest version. Don't forget to add python executables to PATH, marking it in the installation process.
+```bash
+pdf2odt --pdf document.pdf --ocr output.odt
+```
 
-Then just type:
+### 3. Custom Image Resolution
+Set a custom image resolution in DPI (default is 300 DPI; use lower values like 150 DPI for smaller file sizes):
 
-`pip install pdf2odt`
+```bash
+pdf2odt --pdf document.pdf --resolution 150 output.odt
+```
 
-Now you have to download poppler for windows from https://blog.alivate.com.au/poppler-windows/. Uncompress the downloaded file and add its installation directory to Windows environment path. Here you have how to do it https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/ 
+### 4. Full Options Reference
 
+```text
+usage: pdf2odt [-h] [--version] --pdf PDF [--resolution RESOLUTION] [--ocr] output
 
-Now you can use it typing in windows shell:
+Converts a pdf to a LibreOffice Writer document with pages as images
 
-`pdf2odt --pdf doc.pdf doc.odt`
+positional arguments:
+  output                Output odt file
 
-If you want OCR, ou have to download tesseract for windows fromm https://github.com/UB-Mannheim/tesseract/wiki. Then you have to add its installation directory to Windows environment path too.
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --pdf PDF             PDF file to convert
+  --resolution RESOLUTION
+                        Sets DPI image resolution. Default is 300
+  --ocr                 Extracts text with page.get_text() or OCR and inserts result after image in ODT document
+```
 
-`pdf2odt --pdf doc.pdf --tesseract doc.odt`
+---
 
+## Python API Usage
 
-Dependencies
-============
-* https://www.python.org/, as the main programming language.
-* https://pypi.org/project/colorama/, to give console colors.
-* https://github.com/turulomio/unogenerator/, to generate odt file.
-* https://poppler.freedesktop.org/, to convert pdf to images using pdftoppm.
-* https://blog.alivate.com.au/poppler-windows/ to install poppler in windows.
-* https://pypi.org/project/tqdm, to show beautyful progress bars.
-* https://github.com/tesseract-ocr/, for OCR support.
+You can also use `pdf2odt` directly in your Python applications:
 
-Changelog
-=========
-1.0.0 (2024-12-22)
-------------------
-  * Migrated to unogenerator
-  * Updated to poetry
+```python
+from pdf2odt.core import main_command
 
-0.7.0
------
-  * Fixed bug with tesseract parameter position. Thanks @maxlem-neuralium 
-  * Now temporal files are generated with tempfile module.
+# Convert a PDF to ODT with 300 DPI and OCR enabled
+main_command(
+    pdf="path/to/document.pdf",
+    resolution=300,
+    ocr=True,
+    output="path/to/output.odt"
+)
+```
 
-0.6.0
------
-  * Tesseract language is now showed in output
-  * Now pdf2odt validates PDF document
+---
 
-0.5.0
------
-  * Now pdf2odt detects if tesseract language selected is supported.
+## Dependencies
 
-0.4.0
------
-  * Added OCR support with tesseract
-  * Now uses process concurrency and shows a progress bar
+`pdf2odt` relies on the following Python packages:
 
-0.3.0
------
-  * Fixed problem with white spaces paths in windows.
-  * Improved metadata information.
+- [PyMuPDF](https://pypi.org/project/pymupdf/): High-performance PDF rendering and native text extraction.
+- [odfdo](https://pypi.org/project/odfdo/): Pure Python OpenDocument (.odt) document generator.
+- [rapidocr-onnxruntime](https://pypi.org/project/rapidocr-onnxruntime/): Lightweight ONNX-powered OCR engine.
+- [Pillow](https://pypi.org/project/pillow/): Image dimension and format processing.
+- [tqdm](https://pypi.org/project/tqdm/): Console progress bar.
+- [colorama](https://pypi.org/project/colorama/): Colored terminal output.
 
-0.2.0
------
-  * Now works on Windows with popper for windows installation
+---
 
-0.1.0
------
-  * Basic functionality
+## Development & Testing
+
+This project uses [Poetry](https://python-poetry.org/) and [Poe the Poet](https://github.com/nat-n/poethepoet) for development tasks.
+
+### Run Tests
+```bash
+poetry run poe test
+```
+
+### Run Coverage Report
+```bash
+poetry run poe coverage
+```
+
+### Update Translations
+```bash
+poetry run poe translate
+```
+
+---
+
+## License
+
+Distributed under the **GPL-3.0 License**.
+
