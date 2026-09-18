@@ -1,5 +1,4 @@
-## @namespace pdf2odt.core
-## @brief Core functions of the package
+"""Core functions of the package."""
 
 from argparse import ArgumentParser, RawTextHelpFormatter
 from colorama import Fore, Style, init as colorama_init
@@ -28,7 +27,7 @@ except:
     _=str
 
 
-## Checks if filename is a pdf  
+# Checks if filename is a pdf  
 def pdf_check_is_pdf(filename):  
     return pdf_get_pdf_num_pages(filename) > 0
 
@@ -68,10 +67,7 @@ def process_pdf_page(ocr, resolution, number, numpages):
                         f.write(native_text)
     return number
 
-## pdf2odt main script
-## If arguments is None, launches with sys.argc parameters. Entry point is pdf2odt:main
-## You can call with main(['--pretend']). It's equivalento to os.system('pdf2odt --pretend')
-## @param arguments is an array with parser arguments. 
+# pdf2odt main script
 def main(arguments=None):
     start=datetime.now()
     parser=ArgumentParser(prog='pdf2odt', description=_('Converts a pdf to a LibreOffice Writer document with pages as images'), epilog=_("Developed by Mariano Muñoz 2019-{}".format(__versiondate__.year)), formatter_class=RawTextHelpFormatter)

@@ -10,15 +10,6 @@ except:
     _=str
 
 
-def doxygen(self):
-    print("Creating Doxygen Documentation")
-    system("""sed -i -e "41d" doc/Doxyfile""")#Delete line 41
-    system("""sed -i -e "41iPROJECT_NUMBER         = {}" doc/Doxyfile""".format(__version__))#Insert line 41
-    system("rm -Rf build")
-    chdir("doc")
-    system("doxygen Doxyfile")
-    system("rsync -avzP -e 'ssh -l turulomio' html/ frs.sourceforge.net:/home/users/t/tu/turulomio/userweb/htdocs/doxygen/pdf2odt/ --delete-after")
-    chdir("..")
 
 def release():
     print("""Nueva versión:
