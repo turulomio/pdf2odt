@@ -1,5 +1,10 @@
 # pdf2odt
 
+[![Tests](https://github.com/turulomio/pdf2odt/actions/workflows/tests.yml/badge.svg)](https://github.com/turulomio/pdf2odt/actions/workflows/tests.yml)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/pdf2odt)](https://pypi.org/project/pdf2odt/)
+[![PyPI version](https://img.shields.io/pypi/v/pdf2odt)](https://pypi.org/project/pdf2odt/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 **pdf2odt** is a Python command-line utility and library that converts PDF documents into **LibreOffice Writer (.odt)** documents.
 
 It converts each PDF page into a high-resolution image anchored as a character in an A4 page layout, and optionally extracts text (using native vector text extraction or embedded OCR for scanned documents) and appends it after each page image.
