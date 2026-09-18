@@ -1,16 +1,16 @@
-# Spanish translations for PACKAGE package
-# Traducciones al español para el paquete PACKAGE.
-# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# root <turulomio@yahoo.es>, 2018.
+# Spanish translations for pdf2odt package
+# Traducciones al español para el paquete pdf2odt.
+# Copyright (C) 2018-2026 Mariano Muñoz
+# This file is distributed under the same license as the pdf2odt package.
+# Mariano Muñoz <turulomio@yahoo.es>, 2018-2026.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: RecPermissions\n"
+"Project-Id-Version: pdf2odt 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 12:14+0200\n"
-"PO-Revision-Date: 2018-10-22 18:51+0100\n"
-"Last-Translator: root <turulomio@yahoo.es>\n"
+"POT-Creation-Date: 2026-09-18 12:58+0200\n"
+"PO-Revision-Date: 2026-09-18 12:57+0200\n"
+"Last-Translator: Mariano Muñoz <turulomio@yahoo.es>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid "Sets DPI image resolution. Default is 300"
 msgstr "Establece la resolución de la imagen en DPI. Por defecto es 300"
 
 msgid "Extracts text with page.get_text() or OCR and inserts result after image in ODT document"
-msgstr ""
+msgstr "Extrae texto con page.get_text() u OCR e inserta el resultado tras la imagen en el documento ODT"
 
 msgid "Output odt file"
 msgstr "Fichero odt de salida"
@@ -49,37 +49,4 @@ msgid "Converting PDF to ODT"
 msgstr "Convirtiendo el PDF a ODT"
 
 msgid "Converting {} to {} using pdf2odt-{}"
-msgstr ""
-
-#~ msgid "Converting {} to {} using odt2pdf-{}"
-#~ msgstr "Convirtiendo {} a {} usando odt2pdf-{}"
-
-#~ msgid "Language used in tesseract command. Default is eng"
-#~ msgstr "Idioma a usar en el comando tesseract. Por defecto es eng"
-
-#~ msgid "Uses tesseract ocr and insert result after image in ODT document"
-#~ msgstr "Usa el OCR de tesseract y añade el resultado después de la imagen en el documento ODT"
-
-#~ msgid "Language '{}' is not supported by this tesseract installation. Please use one of this languages {} with --tesseract_language parameter"
-#~ msgstr "El idioma '{}' no está soportado en esta instalación de tesseract. Por favor usa uno de estos idiomas {} con el parámetro --tesseract_language"
-
-#~ msgid "Using '{}' language for Tesseract OCR."
-#~ msgstr "Usando el idioma '{}' para el OCR de Tesseract."
-
-#~ msgid "New Release:"
-#~ msgstr "Nueva versión:"
-
-#~ msgid "  * Change version and date in version.py"
-#~ msgstr "  * Cambiar la versión y la fecha en version.py"
-
-#~ msgid "  * Edit Changelog in README"
-#~ msgstr "  * Modificar el Changelog en README"
-
-#~ msgid "  * Make a new tag in github"
-#~ msgstr "  * Hacer un nuevo tag en GitHub"
-
-#~ msgid "  * Create a new gentoo ebuild with the new version"
-#~ msgstr "  * Crea un nuevo ebuild de Gentoo con la nueva versión"
-
-#~ msgid "  * Upload to portage repository"
-#~ msgstr "  * Súbelo al repositorio del portage"
+msgstr "Convirtiendo {} a {} usando pdf2odt-{}"

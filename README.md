@@ -7,7 +7,11 @@
 
 **pdf2odt** is a Python command-line utility and library that converts PDF documents into **LibreOffice Writer (.odt)** documents.
 
-It converts each PDF page into a high-resolution image anchored as a character in an A4 page layout, and optionally extracts text (using native vector text extraction or embedded OCR for scanned documents) and appends it after each page image.
+> [!CAUTION]
+> ### ⚠️ NOT A GENERAL PDF-TO-ODT CONVERTER
+> **This tool is NOT a general-purpose PDF to editable ODT converter (it does not clone the original editable document formatting or layout).**
+>
+> It is designed for a **very specific use case**: it converts a PDF document into an ODT file by generating **images of each page anchored as a character** in an A4 layout, with the option to **include text detected via native extraction or OCR** appended below each page.
 
 ---
 
