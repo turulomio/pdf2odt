@@ -3,7 +3,7 @@
 
 from argparse import ArgumentParser, RawTextHelpFormatter
 from colorama import Fore, Style, init as colorama_init
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from gettext import translation
 from importlib.resources import files
@@ -106,7 +106,7 @@ def main_command(pdf, resolution, ocr, output):
         chdir(tmpdirname)
         #Launching concurrent process
         futures=[]
-        executor = ProcessPoolExecutor(max_workers=cpu_count())
+        executor = ThreadPoolExecutor(max_workers=cpu_count())
         for number in range(numpages):
             futures.append(executor.submit(process_pdf_page, ocr, resolution, number+1, numpages))
         for f in tqdm(as_completed(futures), total=len(futures)):

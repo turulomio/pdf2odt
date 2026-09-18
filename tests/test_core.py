@@ -1,8 +1,9 @@
+import pytest
 import pymupdf
 from os import path, remove
 from PIL import Image as PILImage, ImageDraw
 from odfdo import Document
-from pdf2odt.core import main_command
+from pdf2odt.core import main, main_command, pdf_check_is_pdf, pdf_get_pdf_num_pages
 
 
 def test_pdf_with_text():
@@ -112,5 +113,85 @@ def test_pdf_with_text_and_images():
     assert "TEXTO" in paragraphs_text and ("IMAGEN" in paragraphs_text or "DENTRO" in paragraphs_text)
 
     remove(img_path)
+    remove(pdf_path)
+    remove(odt_path)
+
+
+def test_pdf_without_ocr():
+    # 4. Conversion without OCR flag
+    pdf_path = "test_no_ocr.pdf"
+    odt_path = "test_no_ocr.odt"
+
+    doc = pymupdf.open()
+    page = doc.new_page()
+    page.insert_text((50, 72), "Sample text without OCR requested")
+    doc.save(pdf_path)
+    doc.close()
+
+    main_command(pdf_path, 150, False, odt_path)
+
+    assert path.exists(odt_path)
+    odt_doc = Document(odt_path)
+    assert len(odt_doc.body.frames) == 1
+    # Without OCR, no text paragraphs should be added
+    paragraphs_text = " ".join([p.text_recursive for p in odt_doc.body.paragraphs])
+    assert "Sample text without OCR requested" not in paragraphs_text
+
+    remove(pdf_path)
+    remove(odt_path)
+
+
+def test_invalid_pdf():
+    # 5. Non-existent and invalid file handling
+    assert pdf_get_pdf_num_pages("non_existent_file.pdf") == 0
+    assert pdf_check_is_pdf("non_existent_file.pdf") is False
+
+    with pytest.raises(SystemExit) as exc_info:
+        main_command("non_existent_file.pdf", 300, False, "out.odt")
+    assert exc_info.value.code == 1
+
+
+def test_pdf_with_blank_image_and_native_text():
+    # 7. Test page with non-text image + native text (triggers fallback)
+    img_path = "temp_blank.png"
+    pdf_path = "test_blank.pdf"
+    odt_path = "test_blank.odt"
+
+    img = PILImage.new("RGB", (200, 200), color="blue")
+    img.save(img_path)
+
+    doc = pymupdf.open()
+    page = doc.new_page(width=595, height=842)
+    page.insert_text((50, 50), "Texto nativo con imagen sin texto")
+    page.insert_image(pymupdf.Rect(50, 100, 250, 300), filename=img_path)
+    doc.save(pdf_path)
+    doc.close()
+
+    main_command(pdf_path, 300, True, odt_path)
+    assert path.exists(odt_path)
+
+    odt_doc = Document(odt_path)
+    paragraphs_text = " ".join([p.text_recursive for p in odt_doc.body.paragraphs])
+    assert "Texto nativo con imagen sin texto" in paragraphs_text
+
+    remove(img_path)
+    remove(pdf_path)
+    remove(odt_path)
+
+
+def test_main_cli():
+    # 8. Test CLI entry point main()
+    pdf_path = "test_cli.pdf"
+    odt_path = "test_cli.odt"
+
+    doc = pymupdf.open()
+    page = doc.new_page()
+    page.insert_text((50, 72), "CLI Test Document")
+    doc.save(pdf_path)
+    doc.close()
+
+    main(["--pdf", pdf_path, "--resolution", "150", "--ocr", odt_path])
+    assert path.exists(odt_path)
+
     remove(pdf_path)
     remove(odt_path)

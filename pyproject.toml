@@ -32,3 +32,14 @@ test = { script = "pdf2odt.poethepoet:test" }
 coverage = { script = "pdf2odt.poethepoet:coverage" }
 release = { script = "pdf2odt.poethepoet:release" }
 translate = { script = "pdf2odt.poethepoet:translate" }
+
+[tool.coverage.run]
+source = ["pdf2odt"]
+omit = ["pdf2odt/poethepoet.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "except:",
+    "def __repr__",
+]

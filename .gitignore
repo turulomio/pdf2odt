@@ -19,5 +19,7 @@ pdf2odt.egg-info/
 .jedi
 doc/html
 .coverage
+htmlcov/
+.pytest_cache/
 borrame.pdf
 borrame.odt
